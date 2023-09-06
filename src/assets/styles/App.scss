@@ -1,22 +1,16 @@
 .app {
-  // font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
-  background-color: var(--clr-bg);
-  &.light {
-    --clr-bg: #e2e8f0;
-    --clr-text: #475569;
-    --clr-text-v2: #475569;
-    --clr-violet: #5b21b6;
-    --clr-nav: #f1f5f9;
-  }
-
-  &.dark {
-    --clr-bg: #0f172a;
-    --clr-text: #94a3b8;
-    --clr-text-v2: #fff;
-    --clr-violet: #5b21b6;
-    --clr-nav: #141e33;
-  }
+  background-color: var(--clr-white);
+  --clr-white: #fff;
+  --clr-blue: #5384e4;
+  --clr-green: #1dca96;
+  --clr-orange: #ffad31;
+  --clr-red: #ff8282;
+  --clr-black: #404040;
+  --clr-gray: #a5a5a5;
+  --clr-gray-100: #f5fbff;
+  --clr-gray-200: #cbdaf7;
 }
 .none {
   pointer-events: none;

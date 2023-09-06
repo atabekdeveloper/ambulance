@@ -1,3 +1,4 @@
+@import './antd';
 * {
   padding: 0;
   margin: 0;
@@ -26,14 +27,7 @@ aside {
 }
 html,
 body {
-  // font-family: 'Montserrat', sans-serif;
-  &::-webkit-scrollbar {
-    width: 5px;
-    background-color: #141e33;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #94a3b8;
-  }
+  font-family: 'Inter', sans-serif;
 }
 input,
 button,
@@ -66,6 +60,7 @@ ul {
   }
 }
 img {
+  max-width: 100%;
   vertical-align: top;
 }
 p {
