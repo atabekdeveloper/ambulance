@@ -4,8 +4,9 @@ import { ISharedType } from './shared.types';
 
 const initialState: ISharedType = {
   id: 0,
+  isDrawer: true,
   isModal: false,
-  isMenu: false,
+  isCollapsed: false,
   paramsItem: null,
 };
 
@@ -16,8 +17,11 @@ const sharedSlice = createSlice({
     toggleModal(state) {
       state.isModal = !state.isModal;
     },
-    toggleMenu(state) {
-      state.isMenu = !state.isMenu;
+    toggleDrawer(state) {
+      state.isDrawer = !state.isDrawer;
+    },
+    toggleMenuCollapsed(state) {
+      state.isCollapsed = !state.isCollapsed;
     },
     setId(state, { payload }: PayloadAction<number>) {
       state.id = payload;

@@ -1,0 +1,27 @@
+.layout {
+  main {
+    position: relative;
+    padding: 20px;
+    margin-left: 240px;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    @media (max-width: 900px) {
+      margin-left: 0 !important;
+    }
+    &.activeRoute {
+      margin-left: 0px;
+    }
+  }
+  &.activeDrawer {
+    main {
+      margin-left: 0px !important;
+    }
+  }
+  &.activeCollapsed {
+    main {
+      margin-left: 80px;
+    }
+  }
+}

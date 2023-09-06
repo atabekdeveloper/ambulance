@@ -1,5 +1,7 @@
-const userRoutes = [
-  { path: '/', element: <div /> },
+import { Home } from 'src/components/screens';
+
+const routes = [
+  { path: '/', element: <Home /> },
   { path: '/users', element: <div /> },
 ];
-export { userRoutes };
+export { routes };
