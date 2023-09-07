@@ -67,6 +67,112 @@
   }
 }
 .processed {
+  .processedItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item {
+      position: relative;
+      padding: 16px 32px;
+      border-radius: 6px;
+      background-color: var(--clr-white);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 12px;
+        height: 100%;
+        background-color: var(--clr-green);
+      }
+      .info {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+        &:nth-child(2) {
+          .text {
+            &:nth-child(2) {
+              span {
+                &:nth-child(1) {
+                  font-weight: 500;
+                  color: var(--clr-green);
+                }
+              }
+            }
+          }
+        }
+        .text {
+          display: flex;
+          flex-direction: column;
+          span {
+            font-size: 13px;
+            &:nth-child(1) {
+              color: var(--clr-gray);
+            }
+            &:nth-child(2) {
+              font-weight: 500;
+              color: var(--clr-black);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .brigade {
+  .brigadeItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .item {
+      position: relative;
+      padding: 16px 20px;
+      border-radius: 6px;
+      background-color: var(--clr-white);
+      overflow: hidden;
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding-bottom: 20px;
+        .items {
+          li {
+            background-color: var(--clr-red);
+            border-radius: 50px;
+            color: var(--clr-white);
+            padding: 5px 20px;
+          }
+        }
+        .info {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+          h3 {
+            max-width: 70px;
+            width: 70px;
+          }
+        }
+      }
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        span {
+          &:nth-child(1) {
+            max-width: 70px;
+            width: 100%;
+            color: var(--clr-gray);
+          }
+        }
+      }
+    }
+  }
 }
