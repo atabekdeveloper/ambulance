@@ -3,20 +3,21 @@ import React from 'react';
 import { AiOutlinePhone, AiOutlineUser } from 'react-icons/ai';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { useActions } from 'src/hooks';
+import { TProfileItem } from 'src/services/profile/profile.types';
 
 import s from './header.module.scss';
 
-const HeaderPopoverContent: React.FC = () => {
+const HeaderPopoverContent: React.FC<{ profile?: TProfileItem }> = ({ profile }) => {
   const { logOut } = useActions();
   return (
     <div className={s.popover}>
       <div className={s.item}>
         <AiOutlineUser />
-        <b>Anvar</b>
+        <b>{profile?.first_name}</b>
       </div>
       <div className={s.item}>
         <AiOutlinePhone />
-        <b>+99899288288</b>
+        <b>{profile?.phone}</b>
       </div>
       <Button
         danger

@@ -1,4 +1,5 @@
 @import './antd';
+@import './yandex';
 * {
   padding: 0;
   margin: 0;
@@ -28,6 +29,7 @@ aside {
 html,
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #eaf3fe;
 }
 input,
 button,
