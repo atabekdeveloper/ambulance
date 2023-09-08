@@ -1,6 +1,6 @@
-/* eslint-disable object-curly-newline */
+/* eslint-disable react/no-this-in-sfc */
 import React from 'react';
-import { yandexApi } from 'src/config/url.config';
+import car from 'src/assets/images/car.svg';
 
 import {
   FullscreenControl,
@@ -10,26 +10,54 @@ import {
   RouteButton,
   SearchControl,
   TypeSelector,
-  YMaps,
+  useYMaps,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
 
 import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
-  const x = 0;
+  const ymaps = useYMaps(['templateLayoutFactory']);
+  if (!ymaps?.templateLayoutFactory) return null;
+  const template = ymaps.templateLayoutFactory.createClass(
+    `<div class=${s.marker}>
+      <div class=${s.info}>
+        <p>ОПВ01</p>
+        <span />
+      </div>
+      <img src=${car} alt="Car" />
+     </div>`,
+    {
+      build() {
+        // @ts-ignore
+        template.superclass.build.call(this);
+        // @ts-ignore
+        this.getData().options.set('shape', {
+          type: 'Circle',
+          coordinates: [42.460382, 59.61797],
+          radius: 70,
+        });
+        // @ts-ignore
+        this.getData().geoObject.events.add('click', () => alert('Click'), this);
+      },
+    },
+  );
   return (
-    <YMaps query={{ apikey: yandexApi }}>
-      <Map defaultState={{ center: [42.460382, 59.61797], zoom: 9 }} className={s.map}>
-        <FullscreenControl />
-        <SearchControl />
-        <TypeSelector />
-        <ZoomControl />
-        <GeolocationControl />
-        <RouteButton />
-        <Placemark geometry={[42.460382, 59.61797]} />
-      </Map>
-    </YMaps>
+    <Map
+      state={{
+        center: [42.460382, 59.61797],
+        zoom: 15,
+      }}
+      className={s.map}
+    >
+      <FullscreenControl />
+      <SearchControl />
+      <TypeSelector />
+      <ZoomControl />
+      <GeolocationControl />
+      <RouteButton />
+      <Placemark geometry={[42.460382, 59.61797]} options={{ iconLayout: template }} />
+    </Map>
   );
 };
 

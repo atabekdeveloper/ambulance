@@ -6,7 +6,7 @@ const initialState: ISharedType = {
   id: 0,
   isDrawer: true,
   isModal: false,
-  isCollapsed: false,
+  isCollapsed: true,
   paramsItem: null,
 };
 

@@ -13,7 +13,7 @@ export const fetchPostBrigade = async (values: TBrigadeChange): Promise<SRO<TBri
   return res.data;
 };
 export const fetchEditBrigade = async (values: TBrigadeChange): Promise<SRO<TBrigadeItem>> => {
-  const res = await api.post(`/brigades/${values.id}`, values);
+  const res = await api.put(`/brigades/${values.id}`, values);
   return res.data;
 };
 export const fetchDeleteBrigade = async (id: number): Promise<TMessage> => {
