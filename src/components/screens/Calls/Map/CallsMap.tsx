@@ -1,6 +1,6 @@
 /* eslint-disable react/no-this-in-sfc */
 import React from 'react';
-import car from 'src/assets/images/car.svg';
+import car from 'src/assets/images/car-left.svg';
 
 import {
   FullscreenControl,
