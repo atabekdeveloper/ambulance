@@ -2,10 +2,14 @@ import { api } from 'src/api';
 
 import { SR, SRO, TMessage } from '../index.types';
 
-import { TBrigadeChange, TBrigadeItem } from './brigade.types';
+import { TBrigadeChange, TBrigadeItem, TBrigadeRouterItem } from './brigade.types';
 
 export const fetchGetBrigades = async (): Promise<SR<TBrigadeItem>> => {
   const res = await api.get('/brigades');
+  return res.data;
+};
+export const fetchGetRouteBrigades = async (): Promise<SR<TBrigadeRouterItem>> => {
+  const res = await api.get('/router/brigades');
   return res.data;
 };
 export const fetchPostBrigade = async (values: TBrigadeChange): Promise<SRO<TBrigadeItem>> => {

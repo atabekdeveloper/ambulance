@@ -1,5 +1,7 @@
 /* eslint-disable implicit-arrow-linebreak */
 import { message } from 'antd';
+import Pusher from 'pusher-js';
+import React from 'react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -7,6 +9,7 @@ import {
   fetchDeleteBrigade,
   fetchEditBrigade,
   fetchGetBrigades,
+  fetchGetRouteBrigades,
   fetchPostBrigade,
 } from './brigade.services';
 
@@ -16,6 +19,38 @@ const useGetBrigadesQuery = () =>
     queryKey: ['brigade'],
     onError: (err: Error) => message.error(err.message),
   });
+
+const useGetRouterBrigadesPusherQuery = () => {
+  const queryClient = useQueryClient();
+  React.useEffect(() => {
+    const pusher = new Pusher('a19af38bf0ee06f0149f', {
+      cluster: 'eu',
+    });
+    const channel = pusher.subscribe('location');
+    channel.bind('LocationSent', (event: any) => {
+      const { data } = event;
+      queryClient.setQueryData(['brigade-router'], (oldData: any) => {
+        const newArr = [data, ...oldData.data];
+        const result = newArr.reduce((unique, o) => {
+          if (!unique.some((obj: any) => obj.id === o.id)) {
+            unique.push(o);
+          }
+          return unique;
+        }, []);
+        return { data: result };
+      });
+    });
+  }, [queryClient]);
+};
+
+const useGetRouterBrigadesQuery = () => {
+  useGetRouterBrigadesPusherQuery();
+  return useQuery({
+    queryFn: () => fetchGetRouteBrigades(),
+    queryKey: ['brigade-router'],
+    onError: (err: Error) => message.error(err.message),
+  });
+};
 
 const usePostBrigadeMutation = () => {
   const client = useQueryClient();
@@ -57,5 +92,6 @@ export {
   useDeleteBrigadeMutation,
   useEditBrigadeMutation,
   useGetBrigadesQuery,
+  useGetRouterBrigadesQuery,
   usePostBrigadeMutation,
 };
