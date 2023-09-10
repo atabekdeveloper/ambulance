@@ -11,6 +11,7 @@ export type TBrigadeRouterItem = {
   name: string;
   user_id: number;
   user_full_name: string;
+  medic_name: string;
   user_phone: string;
   vehicle_number: string;
   location: TBrigadeRouterLocation;

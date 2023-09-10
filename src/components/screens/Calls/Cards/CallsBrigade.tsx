@@ -1,6 +1,7 @@
 import { Skeleton } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
+import { useActions } from 'src/hooks';
 import { useGetRouterBrigadesQuery } from 'src/services';
 
 import { CallsMap } from '../Map/CallsMap';
@@ -9,6 +10,7 @@ import s from './cards.module.scss';
 
 const CallsBrigade: React.FC = () => {
   const { data: brigades, isSuccess } = useGetRouterBrigadesQuery();
+  // const { setBrigadeLocation } = useActions();
   return (
     <div className={clsx(s.card, s.brigade)}>
       <ul className={s.brigadeItems}>
@@ -30,7 +32,7 @@ const CallsBrigade: React.FC = () => {
               </div>
               <div className={s.info}>
                 <span>Shıpaker</span>
-                <span>{el.user_full_name}</span>
+                <span>{el.medic_name}</span>
               </div>
             </li>
           ))
