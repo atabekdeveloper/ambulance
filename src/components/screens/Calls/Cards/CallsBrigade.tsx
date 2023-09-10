@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { Skeleton } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
@@ -10,13 +12,17 @@ import s from './cards.module.scss';
 
 const CallsBrigade: React.FC = () => {
   const { data: brigades, isSuccess } = useGetRouterBrigadesQuery();
-  // const { setBrigadeLocation } = useActions();
+  const { setBrigadeLocation } = useActions();
   return (
     <div className={clsx(s.card, s.brigade)}>
       <ul className={s.brigadeItems}>
         {isSuccess ? (
           brigades.data.map((el) => (
-            <li key={el.id} className={clsx(s.item)}>
+            <li
+              key={el.id}
+              className={clsx(s.item)}
+              onClick={() => setBrigadeLocation([el.location.lat, el.location.lng])}
+            >
               <div className={s.top}>
                 <div className={s.info}>
                   <h3>{el.name}</h3>

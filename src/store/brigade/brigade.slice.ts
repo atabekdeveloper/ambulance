@@ -11,7 +11,8 @@ const brigadeSlice = createSlice({
   initialState,
   reducers: {
     setBrigadeLocation(state, { payload }: PayloadAction<number[]>) {
-      state.location = payload;
+      if (payload.length) state.location = payload;
+      else state.location = [42.474037, 59.617937];
     },
   },
 });
