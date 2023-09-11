@@ -7,6 +7,8 @@ import { useEditCallMutation, useGetCallCausesQuery, usePostCallMutation } from 
 import { TCallChange } from 'src/services/call/call.types';
 import { formatStringJoin, formMessage } from 'src/utils';
 
+import { CallsFormMap } from './CallsFormMap';
+
 import s from './form.module.scss';
 
 const CallsForm: React.FC = () => {
@@ -113,6 +115,7 @@ const CallsForm: React.FC = () => {
         >
           <Input.TextArea />
         </Form.Item>
+        <CallsFormMap />
       </Form>
     </CustomModal>
   );

@@ -9,7 +9,6 @@ import {
   GeolocationControl,
   Map,
   Placemark,
-  RouteButton,
   SearchControl,
   TrafficControl,
   TypeSelector,
@@ -19,7 +18,7 @@ import {
 import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
-  const { location, location2, id } = useSelectors();
+  const { location } = useSelectors();
   const { data: brigades } = useGetRouterBrigadesQuery();
   return (
     <Map
@@ -34,9 +33,7 @@ const CallsMap: React.FC = () => {
       <TypeSelector />
       <ZoomControl />
       <GeolocationControl />
-      <RouteButton />
       <TrafficControl />
-      {id && <Placemark geometry={location2} />}
       {brigades?.data.map((brigade) => (
         <Placemark
           key={brigade.id}

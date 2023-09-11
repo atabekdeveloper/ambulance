@@ -4,7 +4,7 @@ import { IBrigadeState } from './brigade.types';
 
 const initialState: IBrigadeState = {
   location: [42.474037, 59.617937],
-  location2: [],
+  location2: [42.474037, 59.617937],
 };
 
 const brigadeSlice = createSlice({
