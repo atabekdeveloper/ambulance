@@ -13,7 +13,7 @@ import s from './form.module.scss';
 
 const CallsForm: React.FC = () => {
   const [form] = Form.useForm();
-  const { paramsItem } = useSelectors();
+  const { paramsItem, location2 } = useSelectors();
 
   const { data: callCauses } = useGetCallCausesQuery();
   const { mutate: addCall, isLoading: addLoading } = usePostCallMutation();
@@ -21,8 +21,21 @@ const CallsForm: React.FC = () => {
 
   const onFinish = (values: TCallChange) => {
     if (paramsItem) {
-      editCall({ ...values, id: paramsItem.id, phone: formatStringJoin(values.phone) });
-    } else addCall({ ...values, phone: formatStringJoin(values.phone) });
+      editCall({
+        ...values,
+        id: paramsItem.id,
+        phone: formatStringJoin(values.phone),
+        lat: location2[0],
+        lng: location2[1],
+      });
+    } else {
+      addCall({
+        ...values,
+        phone: formatStringJoin(values.phone),
+        lat: location2[0],
+        lng: location2[1],
+      });
+    }
   };
 
   React.useEffect(() => {
@@ -35,14 +48,14 @@ const CallsForm: React.FC = () => {
           <Form.Item
             name="last_name"
             label="Фамилия"
-            rules={[{ required: false, message: formMessage('Фамилия') }]}
+            rules={[{ required: true, message: formMessage('Фамилия') }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="first_name"
             label="Имя"
-            rules={[{ required: false, message: formMessage('Имя') }]}
+            rules={[{ required: true, message: formMessage('Имя') }]}
           >
             <Input />
           </Form.Item>

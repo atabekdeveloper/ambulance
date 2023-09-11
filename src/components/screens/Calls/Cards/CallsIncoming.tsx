@@ -12,7 +12,7 @@ import s from './cards.module.scss';
 
 const CallsIncoming: React.FC = () => {
   const { id } = useSelectors();
-  const { setId, setParamsItemForm, setBrigadeLocation2 } = useActions();
+  const { setId, setParamsItemForm, setBrigadeLocation } = useActions();
   const { data: newCalls, isSuccess } = useGetNewCallsQuery();
   const onEditIncomingCall = (id: number) => {
     const findContent = newCalls?.data.find((el) => el.id === id);
@@ -45,20 +45,21 @@ const CallsIncoming: React.FC = () => {
                 </div>
                 <Space>
                   <UiButton
+                    icon={<AiFillEdit />}
+                    onClick={() => onEditIncomingCall(el.id)}
+                    type="default"
+                    color={el.id === id ? '#ffad31' : ''}
+                  />
+                  <UiButton
                     onClick={() => {
                       setId(el.id);
-                      setBrigadeLocation2([55.751574, 37.573856]);
+                      setBrigadeLocation([el.address.lat, el.address.lng]);
                     }}
                     shape="round"
                     color={el.id === id ? '#ffad31' : ''}
                   >
                     Brigada biriktiriw
                   </UiButton>
-                  <UiButton
-                    icon={<AiFillEdit />}
-                    onClick={() => onEditIncomingCall(el.id)}
-                    color={el.id === id ? '#ffad31' : ''}
-                  />
                 </Space>
               </div>
             </li>

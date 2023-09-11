@@ -1,6 +1,7 @@
 import React from 'react';
 import carError from 'src/assets/images/car/error/car-left.svg';
 import carSuccess from 'src/assets/images/car/success/car-left.svg';
+import marker from 'src/assets/images/location-pin.png';
 import { useSelectors } from 'src/hooks';
 import { useGetRouterBrigadesQuery } from 'src/services';
 
@@ -34,6 +35,15 @@ const CallsMap: React.FC = () => {
       <ZoomControl />
       <GeolocationControl />
       <TrafficControl />
+      <Placemark
+        geometry={location}
+        options={{
+          iconLayout: 'default#image',
+          iconImageHref: marker,
+          iconImageSize: [32, 32],
+          iconImageOffset: [-16, -16],
+        }}
+      />
       {brigades?.data.map((brigade) => (
         <Placemark
           key={brigade.id}

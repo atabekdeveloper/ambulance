@@ -29,6 +29,11 @@ const CallsFormMap: React.FC = () => {
         center: location2,
         zoom: 15,
       }}
+      instanceRef={(ref: any) => {
+        if (ref) {
+          ref.options.set('cursor', 'pointer');
+        }
+      }}
       className={s.map}
       onClick={onMapClick}
     >
