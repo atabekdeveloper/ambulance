@@ -17,7 +17,7 @@ const brigadeSlice = createSlice({
     },
     setBrigadeLocation2(state, { payload }: PayloadAction<number[]>) {
       if (payload.length) state.location2 = payload;
-      else state.location = [42.474037, 59.617937];
+      else state.location2 = [42.474037, 59.617937];
     },
   },
 });
