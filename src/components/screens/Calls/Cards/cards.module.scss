@@ -125,6 +125,10 @@
           }
         }
       }
+      .btn {
+        display: flex;
+        justify-content: flex-end;
+      }
     }
   }
 }
@@ -148,11 +152,24 @@
         gap: 15px;
         padding-bottom: 20px;
         .items {
-          li {
-            background-color: var(--clr-red);
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          .status {
             border-radius: 50px;
             color: var(--clr-white);
             padding: 5px 20px;
+            &.free {
+              background-color: var(--clr-green);
+            }
+            &.busy {
+              background-color: var(--clr-red);
+            }
+            &.lunch {
+              background-color: transparent;
+              color: var(--clr-green);
+              border: 1px solid var(--clr-green);
+            }
           }
         }
         .info {

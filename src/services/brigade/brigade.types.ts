@@ -14,6 +14,10 @@ export type TBrigadeRouterItem = {
   medic_name: string;
   user_phone: string;
   vehicle_number: string;
+  statuses: {
+    id: number;
+    name: string;
+  }[];
   location: TBrigadeRouterLocation;
 };
 export type TBrigadeRouterLocation = {

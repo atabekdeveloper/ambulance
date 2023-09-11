@@ -1,19 +1,33 @@
-/* eslint-disable object-curly-newline */
-import { Form, Input, Select, Space } from 'antd';
+import { Form, Input, Select } from 'antd';
 import { MaskedInput } from 'antd-mask-input';
 import React from 'react';
 import { CustomModal } from 'src/components/shared';
-import { useGetCallCausesQuery } from 'src/services';
-import { formMessage } from 'src/utils';
+import { useSelectors } from 'src/hooks';
+import { useEditCallMutation, useGetCallCausesQuery, usePostCallMutation } from 'src/services';
+import { TCallChange } from 'src/services/call/call.types';
+import { formatStringJoin, formMessage } from 'src/utils';
 
 import s from './form.module.scss';
 
 const CallsForm: React.FC = () => {
   const [form] = Form.useForm();
+  const { paramsItem } = useSelectors();
+
   const { data: callCauses } = useGetCallCausesQuery();
-  const onFinish = (values: any) => console.log(values);
+  const { mutate: addCall, isLoading: addLoading } = usePostCallMutation();
+  const { mutate: editCall, isLoading: editLoading } = useEditCallMutation();
+
+  const onFinish = (values: TCallChange) => {
+    if (paramsItem) {
+      editCall({ ...values, id: paramsItem.id, phone: formatStringJoin(values.phone) });
+    } else addCall({ ...values, phone: formatStringJoin(values.phone) });
+  };
+
+  React.useEffect(() => {
+    if (paramsItem) form.setFieldsValue({ ...paramsItem, ...paramsItem.address });
+  }, [form, paramsItem]);
   return (
-    <CustomModal form={form} confirmLoading={false} width={900}>
+    <CustomModal form={form} confirmLoading={addLoading || editLoading} width={900}>
       <Form name="Calls Form" form={form} onFinish={onFinish} autoComplete="off" layout="vertical">
         <div className={s.space}>
           <Form.Item
@@ -40,7 +54,7 @@ const CallsForm: React.FC = () => {
           <Form.Item
             name="phone"
             label="Телефон"
-            rules={[{ required: false, message: formMessage('Телефон') }]}
+            rules={[{ required: true, message: formMessage('Телефон') }]}
           >
             <MaskedInput inputMode="tel" mask="+{998} 00 000 00 00" />
           </Form.Item>
@@ -79,7 +93,7 @@ const CallsForm: React.FC = () => {
           <Form.Item
             name="call_cause_id"
             label="Причина звонка"
-            rules={[{ required: false, message: formMessage('Причина звонка') }]}
+            rules={[{ required: true, message: formMessage('Причина звонка') }]}
           >
             <Select
               showSearch
@@ -92,6 +106,13 @@ const CallsForm: React.FC = () => {
             />
           </Form.Item>
         </div>
+        <Form.Item
+          name="comment"
+          label="Комментария"
+          rules={[{ required: true, message: formMessage('Комментария') }]}
+        >
+          <Input.TextArea />
+        </Form.Item>
       </Form>
     </CustomModal>
   );

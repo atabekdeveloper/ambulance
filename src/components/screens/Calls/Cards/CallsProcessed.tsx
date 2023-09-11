@@ -1,7 +1,8 @@
+import { Button, Empty } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
-import { incomeItems } from 'src/data';
-import { useGetReprocessedCallsQuery } from 'src/services';
+import { CustomPopConfirm } from 'src/components/shared';
+import { useDeleteCallMutation, useGetReprocessedCallsQuery } from 'src/services';
 
 import { CallsMap } from '../Map/CallsMap';
 
@@ -9,6 +10,7 @@ import s from './cards.module.scss';
 
 const CallsProcessed: React.FC = () => {
   const { data: reprocessedCalls } = useGetReprocessedCallsQuery();
+  const { mutate: deleteCall } = useDeleteCallMutation();
   return (
     <div className={clsx(s.card, s.processed)}>
       <ul className={s.processedItems}>
@@ -35,11 +37,23 @@ const CallsProcessed: React.FC = () => {
               </div>
               <div className={s.text}>
                 <span>Tez járdem mashinası biriktirilgen</span>
-                <span>ОПВ01</span>
+                <span>{`${el.birgade_name || '-'}`}</span>
               </div>
+            </div>
+            <div className={s.btn}>
+              <CustomPopConfirm
+                title="Shaqırıwdı biykarlaw"
+                onConfirm={() => deleteCall(el.id)}
+                placement="top"
+              >
+                <Button type="default" danger shape="round">
+                  Biykarlaw
+                </Button>
+              </CustomPopConfirm>
             </div>
           </li>
         ))}
+        {!reprocessedCalls?.data.length && <Empty style={{ marginTop: 100 }} />}
       </ul>
       <CallsMap />
     </div>

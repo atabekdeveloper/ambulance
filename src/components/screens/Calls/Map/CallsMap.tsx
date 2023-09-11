@@ -1,5 +1,6 @@
 import React from 'react';
-import car from 'src/assets/images/car-left.svg';
+import carError from 'src/assets/images/car/error/car-left.svg';
+import carSuccess from 'src/assets/images/car/success/car-left.svg';
 import { useSelectors } from 'src/hooks';
 import { useGetRouterBrigadesQuery } from 'src/services';
 
@@ -10,6 +11,7 @@ import {
   Placemark,
   RouteButton,
   SearchControl,
+  TrafficControl,
   TypeSelector,
   ZoomControl,
 } from '@pbe/react-yandex-maps';
@@ -17,7 +19,7 @@ import {
 import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
-  const { location } = useSelectors();
+  const { location, location2, id } = useSelectors();
   const { data: brigades } = useGetRouterBrigadesQuery();
   return (
     <Map
@@ -33,13 +35,17 @@ const CallsMap: React.FC = () => {
       <ZoomControl />
       <GeolocationControl />
       <RouteButton />
+      <TrafficControl />
+      {id && <Placemark geometry={location2} />}
       {brigades?.data.map((brigade) => (
         <Placemark
           key={brigade.id}
           geometry={[brigade.location.lat, brigade.location.lng]}
           options={{
             iconLayout: 'default#image',
-            iconImageHref: car,
+            iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
+              ? carSuccess
+              : carError,
             iconImageSize: [32, 32],
             iconImageOffset: [-16, -16],
           }}

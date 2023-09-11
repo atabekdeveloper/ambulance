@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Skeleton } from 'antd';
+import { Empty, Skeleton } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
 import { useActions } from 'src/hooks';
@@ -29,7 +29,19 @@ const CallsBrigade: React.FC = () => {
                   <p>{el.user_phone}</p>
                 </div>
                 <ul className={s.items}>
-                  <li>Bánt</li>
+                  {el.statuses.map((status) => (
+                    <li
+                      key={status.id}
+                      className={clsx(
+                        s.status,
+                        status.name === 'Bos' && s.free,
+                        status.name === 'Bánt' && s.busy,
+                        status.name === 'Túslik' && s.lunch,
+                      )}
+                    >
+                      {status.name}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className={s.info}>
@@ -45,6 +57,7 @@ const CallsBrigade: React.FC = () => {
         ) : (
           <Skeleton />
         )}
+        {!brigades?.data.length && <Empty style={{ marginTop: 100 }} />}
       </ul>
       <CallsMap />
     </div>

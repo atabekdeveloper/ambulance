@@ -8,6 +8,7 @@ export type TCallItem = {
   comment: string;
   created_at: string;
   address: TCallAddressItem;
+  birgade_name: string;
 };
 export type TCallAddressItem = {
   region: string;

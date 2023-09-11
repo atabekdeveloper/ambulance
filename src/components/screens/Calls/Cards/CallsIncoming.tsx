@@ -1,4 +1,4 @@
-import { Skeleton, Space } from 'antd';
+import { Empty, Skeleton, Space } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
 import { AiFillEdit } from 'react-icons/ai';
@@ -12,8 +12,12 @@ import s from './cards.module.scss';
 
 const CallsIncoming: React.FC = () => {
   const { id } = useSelectors();
-  const { setId } = useActions();
+  const { setId, setParamsItemForm, setBrigadeLocation2 } = useActions();
   const { data: newCalls, isSuccess } = useGetNewCallsQuery();
+  const onEditIncomingCall = (id: number) => {
+    const findContent = newCalls?.data.find((el) => el.id === id);
+    setParamsItemForm(findContent);
+  };
   return (
     <div className={clsx(s.card, s.incoming)}>
       <ul className={s.incomingItems}>
@@ -23,7 +27,7 @@ const CallsIncoming: React.FC = () => {
               <div className={s.info}>
                 <div className={s.text}>
                   <span>Jańa</span>
-                  <span>{`№${el.call_cause_id}`}</span>
+                  <span>{`№${el.id}`}</span>
                 </div>
                 <div className={s.text}>
                   <span>Qabıllanǵan waqtı</span>
@@ -41,13 +45,20 @@ const CallsIncoming: React.FC = () => {
                 </div>
                 <Space>
                   <UiButton
-                    onClick={() => setId(el.id)}
+                    onClick={() => {
+                      setId(el.id);
+                      setBrigadeLocation2([55.751574, 37.573856]);
+                    }}
                     shape="round"
                     color={el.id === id ? '#ffad31' : ''}
                   >
                     Brigada biriktiriw
                   </UiButton>
-                  <UiButton icon={<AiFillEdit />} color={el.id === id ? '#ffad31' : ''} />
+                  <UiButton
+                    icon={<AiFillEdit />}
+                    onClick={() => onEditIncomingCall(el.id)}
+                    color={el.id === id ? '#ffad31' : ''}
+                  />
                 </Space>
               </div>
             </li>
@@ -55,6 +66,7 @@ const CallsIncoming: React.FC = () => {
         ) : (
           <Skeleton />
         )}
+        {!newCalls?.data.length && <Empty style={{ marginTop: 100 }} />}
       </ul>
       <CallsMap />
     </div>
