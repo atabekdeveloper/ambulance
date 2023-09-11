@@ -12,11 +12,14 @@ import s from './cards.module.scss';
 
 const CallsIncoming: React.FC = () => {
   const { id } = useSelectors();
-  const { setId, setParamsItemForm, setBrigadeLocation } = useActions();
+  const { setId, setParamsItemForm, setBrigadeLocation2 } = useActions();
   const { data: newCalls, isSuccess } = useGetNewCallsQuery();
   const onEditIncomingCall = (id: number) => {
     const findContent = newCalls?.data.find((el) => el.id === id);
-    setParamsItemForm(findContent);
+    if (findContent) {
+      setParamsItemForm(findContent);
+      setBrigadeLocation2([findContent.address.lat, findContent.address.lng]);
+    }
   };
   return (
     <div className={clsx(s.card, s.incoming)}>
@@ -53,7 +56,7 @@ const CallsIncoming: React.FC = () => {
                   <UiButton
                     onClick={() => {
                       setId(el.id);
-                      setBrigadeLocation([el.address.lat, el.address.lng]);
+                      setBrigadeLocation2([el.address.lat, el.address.lng]);
                     }}
                     shape="round"
                     color={el.id === id ? '#ffad31' : ''}
@@ -67,7 +70,9 @@ const CallsIncoming: React.FC = () => {
         ) : (
           <Skeleton />
         )}
-        {!newCalls?.data.length && <Empty className={s.empty} description="Нет входящих" />}
+        {isSuccess && !newCalls?.data.length && (
+          <Empty className={s.empty} description="Нет входящих" />
+        )}
       </ul>
       <CallsMap />
     </div>

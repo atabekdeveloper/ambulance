@@ -7,7 +7,6 @@ import { useGetRouterBrigadesQuery } from 'src/services';
 
 import {
   FullscreenControl,
-  GeolocationControl,
   Map,
   Placemark,
   SearchControl,
@@ -19,7 +18,7 @@ import {
 import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
-  const { location } = useSelectors();
+  const { location, id } = useSelectors();
   const { data: brigades } = useGetRouterBrigadesQuery();
   return (
     <Map
@@ -33,7 +32,6 @@ const CallsMap: React.FC = () => {
       <SearchControl />
       <TypeSelector />
       <ZoomControl />
-      <GeolocationControl />
       <TrafficControl />
       <Placemark
         geometry={location}
@@ -42,6 +40,7 @@ const CallsMap: React.FC = () => {
           iconImageHref: marker,
           iconImageSize: [32, 32],
           iconImageOffset: [-16, -16],
+          visible: !!id,
         }}
       />
       {brigades?.data.map((brigade) => (

@@ -48,14 +48,14 @@ const CallsForm: React.FC = () => {
           <Form.Item
             name="last_name"
             label="Фамилия"
-            rules={[{ required: true, message: formMessage('Фамилия') }]}
+            rules={[{ required: false, message: formMessage('Фамилия') }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
             name="first_name"
             label="Имя"
-            rules={[{ required: true, message: formMessage('Имя') }]}
+            rules={[{ required: false, message: formMessage('Имя') }]}
           >
             <Input />
           </Form.Item>

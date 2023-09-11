@@ -57,7 +57,9 @@ const CallsBrigade: React.FC = () => {
         ) : (
           <Skeleton />
         )}
-        {!brigades?.data.length && <Empty className={s.empty} description="Нет бригадов" />}
+        {isSuccess && !brigades?.data.length && (
+          <Empty className={s.empty} description="Нет бригадов" />
+        )}
       </ul>
       <CallsMap />
     </div>

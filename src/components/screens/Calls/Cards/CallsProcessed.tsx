@@ -9,7 +9,7 @@ import { CallsMap } from '../Map/CallsMap';
 import s from './cards.module.scss';
 
 const CallsProcessed: React.FC = () => {
-  const { data: reprocessedCalls } = useGetReprocessedCallsQuery();
+  const { data: reprocessedCalls, isSuccess } = useGetReprocessedCallsQuery();
   const { mutate: deleteCall } = useDeleteCallMutation();
   return (
     <div className={clsx(s.card, s.processed)}>
@@ -53,7 +53,7 @@ const CallsProcessed: React.FC = () => {
             </div>
           </li>
         ))}
-        {!reprocessedCalls?.data.length && (
+        {isSuccess && !reprocessedCalls?.data.length && (
           <Empty className={s.empty} description="Нет обработанных" />
         )}
       </ul>

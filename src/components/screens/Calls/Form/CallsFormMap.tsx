@@ -3,6 +3,7 @@ import marker from 'src/assets/images/location-pin.png';
 import { useActions, useSelectors } from 'src/hooks';
 
 import {
+  Button,
   FullscreenControl,
   Map,
   Placemark,
@@ -13,7 +14,7 @@ import {
 import s from './form.module.scss';
 
 const CallsFormMap: React.FC = () => {
-  const { location2 } = useSelectors();
+  const { location, location2 } = useSelectors();
   const { setBrigadeLocation2 } = useActions();
   const onMapClick = async (event: any) => {
     const map = event.get('coords');
@@ -26,13 +27,8 @@ const CallsFormMap: React.FC = () => {
   return (
     <Map
       state={{
-        center: location2,
+        center: location2.length ? location2 : location,
         zoom: 15,
-      }}
-      instanceRef={(ref: any) => {
-        if (ref) {
-          ref.options.set('cursor', 'pointer');
-        }
       }}
       className={s.map}
       onClick={onMapClick}
@@ -40,6 +36,12 @@ const CallsFormMap: React.FC = () => {
       <FullscreenControl />
       <SearchControl />
       <ZoomControl />
+      <Button
+        options={{ maxWidth: 128, visible: !!location2.length }}
+        data={{ content: 'Отменить' }}
+        state={{ selected: !!location2.length }}
+        onClick={() => setBrigadeLocation2([])}
+      />
       <Placemark
         geometry={location2}
         options={{
@@ -48,6 +50,7 @@ const CallsFormMap: React.FC = () => {
           iconImageHref: marker,
           iconImageSize: [32, 32],
           iconImageOffset: [-16, -16],
+          visible: !!location2.length,
         }}
         onDragEnd={handlePlacemarkDrag}
       />
