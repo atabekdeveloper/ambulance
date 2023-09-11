@@ -53,7 +53,9 @@ const CallsProcessed: React.FC = () => {
             </div>
           </li>
         ))}
-        {!reprocessedCalls?.data.length && <Empty style={{ marginTop: 100 }} />}
+        {!reprocessedCalls?.data.length && (
+          <Empty className={s.empty} description="Нет обработанных" />
+        )}
       </ul>
       <CallsMap />
     </div>

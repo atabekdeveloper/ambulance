@@ -67,7 +67,7 @@ const CallsIncoming: React.FC = () => {
         ) : (
           <Skeleton />
         )}
-        {!newCalls?.data.length && <Empty style={{ marginTop: 100 }} />}
+        {!newCalls?.data.length && <Empty className={s.empty} description="Нет входящих" />}
       </ul>
       <CallsMap />
     </div>

@@ -14,6 +14,11 @@
       transform: translateX(0px);
     }
   }
+  .empty {
+    background-color: var(--clr-white);
+    padding: 100px 0;
+    border-radius: 10px;
+  }
 }
 .incoming {
   .incomingItems {
