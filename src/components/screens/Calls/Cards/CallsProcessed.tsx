@@ -44,7 +44,7 @@ const CallsProcessed: React.FC = () => {
               <div className={s.btn}>
                 <CustomPopConfirm
                   title="Shaqırıwdı biykarlaw"
-                  onConfirm={() => deleteCall({ callId: el.id, brigadeId: 2 })}
+                  onConfirm={() => deleteCall({ callId: el.id, brigadeId: el.brigade_id })}
                   placement="top"
                 >
                   <Button type="default" danger shape="round">

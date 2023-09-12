@@ -9,6 +9,7 @@ export type TCallItem = {
   created_at: string;
   address: TCallAddressItem;
   birgade_name: string;
+  brigade_id: number;
 };
 export type TCallAddressItem = {
   region: string;
