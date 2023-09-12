@@ -27,7 +27,7 @@ const CallsFormMap: React.FC = () => {
   return (
     <Map
       state={{
-        center: location2.length ? location2 : location,
+        center: location2[0] ? location2 : location,
         zoom: 15,
       }}
       className={s.map}
@@ -37,9 +37,9 @@ const CallsFormMap: React.FC = () => {
       <SearchControl />
       <ZoomControl />
       <Button
-        options={{ maxWidth: 128, visible: !!location2.length }}
+        options={{ maxWidth: 128, visible: !!location2[0] }}
         data={{ content: 'Отменить' }}
-        state={{ selected: !!location2.length }}
+        state={{ selected: !!location2[0] }}
         onClick={() => setBrigadeLocation2([])}
       />
       <Placemark
@@ -50,7 +50,7 @@ const CallsFormMap: React.FC = () => {
           iconImageHref: marker,
           iconImageSize: [32, 32],
           iconImageOffset: [-16, -16],
-          visible: !!location2.length,
+          visible: !!location2[0],
         }}
         onDragEnd={handlePlacemarkDrag}
       />

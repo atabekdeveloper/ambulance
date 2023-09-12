@@ -31,6 +31,6 @@ export type TCallChange = {
   street: string;
   home: string;
   place: string;
-  lat: number;
-  lng: number;
+  lat: number | null;
+  lng: number | null;
 };

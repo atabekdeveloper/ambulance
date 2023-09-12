@@ -25,15 +25,15 @@ const CallsForm: React.FC = () => {
         ...values,
         id: paramsItem.id,
         phone: formatStringJoin(values.phone),
-        lat: location2[0],
-        lng: location2[1],
+        lat: location2[0] || null,
+        lng: location2[1] || null,
       });
     } else {
       addCall({
         ...values,
         phone: formatStringJoin(values.phone),
-        lat: location2[0],
-        lng: location2[1],
+        lat: location2[0] || null,
+        lng: location2[1] || null,
       });
     }
   };
