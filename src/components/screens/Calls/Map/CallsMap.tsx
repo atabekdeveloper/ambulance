@@ -1,3 +1,5 @@
+import { notification } from 'antd';
+import clsx from 'clsx';
 import React from 'react';
 import carError from 'src/assets/images/car/error/car-left.svg';
 import carSuccess from 'src/assets/images/car/success/car-left.svg';
@@ -20,45 +22,74 @@ import s from './map.module.scss';
 const CallsMap: React.FC = () => {
   const { location, id } = useSelectors();
   const { data: brigades } = useGetRouterBrigadesQuery();
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (id: number) => {
+    const findItem = brigades?.data.find((el) => el.id === id);
+    api.open({
+      message: 'Бригада',
+      description: (
+        <div className={s.notification}>
+          <div className={s.top}>
+            <div className={s.left}>
+              <h2>{findItem?.name}</h2>
+              <ul className={s.items}>
+                {findItem?.statuses.includes({ id: 1, name: 'Bos' }) ? (
+                  <li className={clsx(s.status, s.free)}>Свободно</li>
+                ) : (
+                  <li className={clsx(s.status, s.busy)}>Занят</li>
+                )}
+              </ul>
+            </div>
+            <p>{findItem?.user_phone}</p>
+          </div>
+        </div>
+      ),
+      placement: 'topRight',
+      duration: 0,
+    });
+  };
   return (
-    <Map
-      state={{
-        center: location,
-        zoom: 15,
-      }}
-      className={s.map}
-    >
-      <FullscreenControl />
-      <SearchControl />
-      <TypeSelector />
-      <ZoomControl />
-      <TrafficControl />
-      <Placemark
-        geometry={location}
-        options={{
-          iconLayout: 'default#image',
-          iconImageHref: marker,
-          iconImageSize: [32, 32],
-          iconImageOffset: [-16, -16],
-          visible: !!id,
+    <>
+      {contextHolder}
+      <Map
+        state={{
+          center: location,
+          zoom: 15,
         }}
-      />
-      {brigades?.data.map((brigade) => (
+        className={s.map}
+      >
+        <FullscreenControl />
+        <SearchControl />
+        <TypeSelector />
+        <ZoomControl />
+        <TrafficControl />
         <Placemark
-          key={brigade.id}
-          geometry={[brigade.location.lat, brigade.location.lng]}
+          geometry={location}
           options={{
             iconLayout: 'default#image',
-            iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
-              ? carSuccess
-              : carError,
+            iconImageHref: marker,
             iconImageSize: [32, 32],
             iconImageOffset: [-16, -16],
+            visible: !!id,
           }}
-          onClick={() => alert(1)}
         />
-      ))}
-    </Map>
+        {brigades?.data.map((brigade) => (
+          <Placemark
+            key={brigade.id}
+            geometry={[brigade.location.lat, brigade.location.lng]}
+            options={{
+              iconLayout: 'default#image',
+              iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
+                ? carSuccess
+                : carError,
+              iconImageSize: [32, 32],
+              iconImageOffset: [-16, -16],
+            }}
+            onClick={() => openNotification(brigade.id)}
+          />
+        ))}
+      </Map>
+    </>
   );
 };
 

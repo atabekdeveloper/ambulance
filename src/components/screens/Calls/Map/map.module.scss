@@ -37,3 +37,39 @@
     max-width: 40px;
   }
 }
+.notification {
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      align-items: center;
+      h2 {
+        font-weight: 500;
+        color: var(--clr-black);
+      }
+      .items {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .status {
+          border-radius: 50px;
+          color: var(--clr-white);
+          padding: 5px 20px;
+          &.free {
+            background-color: var(--clr-green);
+          }
+          &.busy {
+            background-color: var(--clr-red);
+          }
+          &.lunch {
+            background-color: transparent;
+            color: var(--clr-green);
+            border: 1px solid var(--clr-green);
+          }
+        }
+      }
+    }
+  }
+}

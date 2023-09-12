@@ -1,10 +1,11 @@
 import { Empty, Skeleton, Space } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { CustomPopConfirm } from 'src/components/shared';
 import { UiButton } from 'src/components/ui';
 import { useActions, useSelectors } from 'src/hooks';
-import { useGetNewCallsQuery } from 'src/services';
+import { useDeleteCallMutation, useGetNewCallsQuery } from 'src/services';
 
 import { CallsMap } from '../Map/CallsMap';
 
@@ -14,6 +15,7 @@ const CallsIncoming: React.FC = () => {
   const { id } = useSelectors();
   const { setId, setParamsItemForm, setBrigadeLocation2 } = useActions();
   const { data: newCalls, isSuccess } = useGetNewCallsQuery();
+  const { mutate: deleteCall } = useDeleteCallMutation();
   const onEditIncomingCall = (id: number) => {
     const findContent = newCalls?.data.find((el) => el.id === id);
     if (findContent) {
@@ -53,6 +55,13 @@ const CallsIncoming: React.FC = () => {
                     type="default"
                     color={el.id === id ? '#ffad31' : ''}
                   />
+                  <CustomPopConfirm
+                    title="Shaqırıwdı biykarlaw"
+                    onConfirm={() => deleteCall(el.id)}
+                    placement="top"
+                  >
+                    <UiButton type="default" color="#FF4D4F" icon={<AiFillDelete />} />
+                  </CustomPopConfirm>
                   <UiButton
                     onClick={() => {
                       setId(el.id);

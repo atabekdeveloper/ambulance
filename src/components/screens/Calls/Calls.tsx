@@ -12,9 +12,10 @@ import s from './calls.module.scss';
 
 const Call: React.FC = () => {
   const [callType, setCallType] = React.useState('incoming');
-  const { setBrigadeLocation } = useActions();
+  const { setBrigadeLocation, setId } = useActions();
   React.useEffect(() => {
     setBrigadeLocation([]);
+    setId(0);
   }, [callType]);
   return (
     <div className={s.calls}>
