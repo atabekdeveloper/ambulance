@@ -4,8 +4,9 @@ import React from 'react';
 import carError from 'src/assets/images/car/error/car-left.svg';
 import carSuccess from 'src/assets/images/car/success/car-left.svg';
 import marker from 'src/assets/images/location-pin.png';
+import { UiButton } from 'src/components/ui';
 import { useSelectors } from 'src/hooks';
-import { useGetRouterBrigadesQuery } from 'src/services';
+import { useGetRouterBrigadesQuery, usePostCallBrigadeMutation } from 'src/services';
 
 import {
   Clusterer,
@@ -25,6 +26,7 @@ const CallsMap: React.FC = () => {
   const [api, contextHolder] = notification.useNotification();
 
   const { data: brigades } = useGetRouterBrigadesQuery();
+  const { mutate: addCall, isLoading } = usePostCallBrigadeMutation();
 
   const openNotification = (id: number) => {
     const findItem = brigades?.data.find((el) => el.id === id);
@@ -45,6 +47,30 @@ const CallsMap: React.FC = () => {
               </ul>
             </div>
             <p>{findItem?.user_phone}</p>
+          </div>
+          <div className={s.bottom}>
+            <ul className={s.items}>
+              <li className={s.item}>
+                <span>Ornı</span>
+                <span>{findItem?.location.place}</span>
+              </li>
+              <li className={s.item}>
+                <span>Shıpaker</span>
+                <span>{findItem?.medic_name}</span>
+              </li>
+            </ul>
+            {findItem?.statuses.includes({ id: 1, name: 'Bos' }) && (
+              <UiButton
+                shape="round"
+                block
+                loading={isLoading}
+                onClick={() => {
+                  addCall({ callId: Number(findItem?.call_id), brigadeId: Number(findItem?.id) });
+                }}
+              >
+                Jollaw
+              </UiButton>
+            )}
           </div>
         </div>
       ),

@@ -155,7 +155,7 @@
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 15px;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         .items {
           display: flex;
           align-items: center;
@@ -177,26 +177,26 @@
             }
           }
         }
-        .info {
+        .head {
           display: flex;
           align-items: center;
           gap: 30px;
-          h3 {
-            max-width: 70px;
-            width: 70px;
-          }
         }
       }
       .info {
         display: flex;
-        align-items: center;
-        flex-wrap: wrap;
         gap: 30px;
         span {
+          font-size: 14px;
           &:nth-child(1) {
+            color: var(--clr-gray);
             max-width: 70px;
             width: 100%;
-            color: var(--clr-gray);
+          }
+          &:nth-child(2) {
+            font-weight: 500;
+            color: var(--clr-black);
+            font-size: 15px;
           }
         }
       }

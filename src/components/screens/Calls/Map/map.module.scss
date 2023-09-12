@@ -42,6 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 20px;
     .left {
       display: flex;
       align-items: center;
@@ -63,6 +64,33 @@
           }
           &.busy {
             background-color: #ff8282;
+          }
+        }
+      }
+    }
+  }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        span {
+          font-size: 15px;
+          &:nth-child(1) {
+            color: #a5a5a5;
+            max-width: 70px;
+            width: 100%;
+          }
+          &:nth-child(2) {
+            color: #404040;
+            font-weight: 500;
           }
         }
       }

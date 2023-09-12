@@ -24,7 +24,7 @@ const CallsBrigade: React.FC = () => {
               onClick={() => setBrigadeLocation([el.location.lat, el.location.lng])}
             >
               <div className={s.top}>
-                <div className={s.info}>
+                <div className={s.head}>
                   <h3>{el.name}</h3>
                   <p>{el.user_phone}</p>
                 </div>
