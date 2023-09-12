@@ -1,52 +1,60 @@
-/* eslint-disable object-curly-newline */
 /* eslint-disable implicit-arrow-linebreak */
 import { message } from 'antd';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { fetchDeleteCall, fetchEditCall, fetchGetCalls, fetchPostCall } from './call.services';
+import {
+  fetchDeleteCallCause,
+  fetchEditCallCause,
+  fetchGetCallCauses,
+  fetchPostCallCause,
+} from './call-cause.services';
 
-const useGetCallsQuery = () =>
+const useGetCallCausesQuery = () =>
   useQuery({
-    queryFn: () => fetchGetCalls(),
-    queryKey: ['call'],
+    queryFn: () => fetchGetCallCauses(),
+    queryKey: ['call-cause'],
     onError: (err: Error) => message.error(err.message),
   });
 
-const usePostCallMutation = () => {
+const usePostCallCauseMutation = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: fetchPostCall,
+    mutationFn: fetchPostCallCause,
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ['call'] });
+      client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
     onError: (err: Error) => message.error(err.message),
   });
 };
 
-const useEditCallMutation = () => {
+const useEditCallCauseMutation = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: fetchEditCall,
+    mutationFn: fetchEditCallCause,
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ['call'] });
+      client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
     onError: (err: Error) => message.error(err.message),
   });
 };
 
-const useDeleteCallMutation = () => {
+const useDeleteCallCauseMutation = () => {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: fetchDeleteCall,
+    mutationFn: fetchDeleteCallCause,
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ['call'] });
+      client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
     onError: (err: Error) => message.error(err.message),
   });
 };
-
-export { useDeleteCallMutation, useEditCallMutation, useGetCallsQuery, usePostCallMutation };
+export {
+  useDeleteCallCauseMutation,
+  useEditCallCauseMutation,
+  useGetCallCausesQuery,
+  usePostCallCauseMutation,
+};

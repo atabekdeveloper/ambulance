@@ -34,7 +34,3 @@ export type TCallChange = {
   lat: number;
   lng: number;
 };
-export type TCallCauseItem = {
-  id: number;
-  name: string;
-};

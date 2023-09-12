@@ -1,16 +1,25 @@
 import { Button, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-import { MdClear } from 'react-icons/md';
+import { AiFillDelete } from 'react-icons/ai';
+import { MdModeEdit } from 'react-icons/md';
 import { CustomPopConfirm, CustomTable } from 'src/components/shared';
+import { UiButton } from 'src/components/ui';
+import { useActions } from 'src/hooks';
 import { useDeleteBrigadeMutation, useGetBrigadesQuery } from 'src/services';
 import { TBrigadeItem } from 'src/services/brigade/brigade.types';
 
 const BrigadeTable: React.FC = () => {
+  const { setParamsItemForm } = useActions();
+
   const { data: brigades, isLoading } = useGetBrigadesQuery();
   const { mutate: deleteBrigade } = useDeleteBrigadeMutation();
 
   const onDeleteBrigade = (id: number) => deleteBrigade(id);
+  const onEditBrigade = (id: number) => {
+    const findItem = brigades?.data.find((brigade) => brigade.id === id);
+    setParamsItemForm(findItem);
+  };
 
   const columns: ColumnsType<TBrigadeItem> = [
     {
@@ -29,14 +38,20 @@ const BrigadeTable: React.FC = () => {
       key: 'vehicle_number',
     },
     {
+      title: 'Имя врача',
+      dataIndex: 'medic_name',
+      key: 'medic_name',
+    },
+    {
       fixed: 'right',
       width: 100,
       key: 'action',
       align: 'center',
       render: (_, r) => (
         <Space>
+          <UiButton color="#FFC108" icon={<MdModeEdit />} onClick={() => onEditBrigade(r.id)} />
           <CustomPopConfirm title={r.name} onConfirm={() => onDeleteBrigade(r.id)}>
-            <Button icon={<MdClear />} type="primary" danger />
+            <Button icon={<AiFillDelete />} type="primary" danger />
           </CustomPopConfirm>
         </Space>
       ),

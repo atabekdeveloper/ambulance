@@ -13,3 +13,7 @@ export interface SRO<T> {
   message: string;
   status: boolean;
 }
+export type TGetParamItem = {
+  id: number;
+  name: string;
+};
