@@ -8,6 +8,7 @@ import { useSelectors } from 'src/hooks';
 import { useGetRouterBrigadesQuery } from 'src/services';
 
 import {
+  Clusterer,
   FullscreenControl,
   Map,
   Placemark,
@@ -21,12 +22,15 @@ import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
   const { location, id } = useSelectors();
-  const { data: brigades } = useGetRouterBrigadesQuery();
   const [api, contextHolder] = notification.useNotification();
+
+  const { data: brigades } = useGetRouterBrigadesQuery();
+
   const openNotification = (id: number) => {
     const findItem = brigades?.data.find((el) => el.id === id);
     api.open({
       message: 'Бригада',
+      key: 'updatable',
       description: (
         <div className={s.notification}>
           <div className={s.top}>
@@ -73,21 +77,28 @@ const CallsMap: React.FC = () => {
             visible: !!id,
           }}
         />
-        {brigades?.data.map((brigade) => (
-          <Placemark
-            key={brigade.id}
-            geometry={[brigade.location.lat, brigade.location.lng]}
-            options={{
-              iconLayout: 'default#image',
-              iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
-                ? carSuccess
-                : carError,
-              iconImageSize: [32, 32],
-              iconImageOffset: [-16, -16],
-            }}
-            onClick={() => openNotification(brigade.id)}
-          />
-        ))}
+        <Clusterer
+          options={{
+            preset: 'islands#invertedVioletClusterIcons',
+            groupByCoordinates: false,
+          }}
+        >
+          {brigades?.data.map((brigade) => (
+            <Placemark
+              key={brigade.id}
+              geometry={[brigade.location.lat, brigade.location.lng]}
+              options={{
+                iconLayout: 'default#image',
+                iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
+                  ? carSuccess
+                  : carError,
+                iconImageSize: [36, 36],
+                iconImageOffset: [-18, -18],
+              }}
+              onClick={() => openNotification(brigade.id)}
+            />
+          ))}
+        </Clusterer>
       </Map>
     </>
   );

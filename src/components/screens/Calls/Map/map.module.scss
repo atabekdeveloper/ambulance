@@ -45,6 +45,7 @@
     .left {
       display: flex;
       align-items: center;
+      gap: 20px;
       h2 {
         font-weight: 500;
         color: var(--clr-black);
@@ -55,18 +56,13 @@
         gap: 10px;
         .status {
           border-radius: 50px;
-          color: var(--clr-white);
+          color: #fff;
           padding: 5px 20px;
           &.free {
-            background-color: var(--clr-green);
+            background-color: #1dca96;
           }
           &.busy {
-            background-color: var(--clr-red);
-          }
-          &.lunch {
-            background-color: transparent;
-            color: var(--clr-green);
-            border: 1px solid var(--clr-green);
+            background-color: #ff8282;
           }
         }
       }
