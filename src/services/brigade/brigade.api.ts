@@ -31,13 +31,14 @@ const useGetRouterBrigadesPusherQuery = () => {
       const { data } = event;
       queryClient.setQueryData(['brigade-router'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
+        const newArr2 = [...oldData.data].filter((el) => el.id !== data.id);
         const result = newArr.reduce((unique, o) => {
           if (!unique.some((obj: any) => obj.id === o.id)) {
             unique.push(o);
           }
           return unique;
         }, []);
-        return { data: result };
+        return { data: event.method === 'DELETE' ? newArr2 : result };
       });
     });
   }, [queryClient]);

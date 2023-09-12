@@ -1,6 +1,7 @@
 export * from './auth/auth.api';
 export * from './brigade/brigade.api';
 export * from './brigade/type/brigade-type.api';
+export * from './call/brigade/call-brigade.api';
 export * from './call/call.api';
 export * from './call/cause/call-cause.api';
 export * from './call/router/call-router.api';
