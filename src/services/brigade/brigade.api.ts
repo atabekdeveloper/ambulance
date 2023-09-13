@@ -41,7 +41,7 @@ const useGetRouterBrigadesPusherQuery = () => {
           }
           return unique;
         }, []);
-        return { data: result };
+        return { data: event.method === 'DELETE' ? newArr2 : result };
       });
     };
 
