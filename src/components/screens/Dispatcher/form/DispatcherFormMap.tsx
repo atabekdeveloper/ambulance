@@ -13,7 +13,7 @@ import {
 
 import s from './form.module.scss';
 
-const CallsFormMap: React.FC = () => {
+const DispatcherFormMap: React.FC = () => {
   const { location, location2 } = useSelectors();
   const { setBrigadeLocation2 } = useActions();
   const onMapClick = async (event: any) => {
@@ -58,4 +58,4 @@ const CallsFormMap: React.FC = () => {
   );
 };
 
-export { CallsFormMap };
+export { DispatcherFormMap };

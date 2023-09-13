@@ -28,7 +28,7 @@ const CallsProcessed: React.FC = () => {
                 </div>
                 <div className={s.text}>
                   <span>Адрес</span>
-                  <span>{`${el.address.fullAddress || '-'}`}</span>
+                  <span>{`${el.address.full_address || '-'}`}</span>
                 </div>
               </div>
               <div className={s.info}>

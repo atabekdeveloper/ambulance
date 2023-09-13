@@ -7,11 +7,11 @@ import { useEditCallMutation, useGetCallCausesQuery, usePostCallMutation } from 
 import { TCallChange } from 'src/services/call/call.types';
 import { formatStringJoin, formMessage } from 'src/utils';
 
-import { CallsFormMap } from './CallsFormMap';
+import { DispatcherFormMap } from './DispatcherFormMap';
 
 import s from './form.module.scss';
 
-const CallsForm: React.FC = () => {
+const DispatcherForm: React.FC = () => {
   const [form] = Form.useForm();
   const { paramsItem, location2 } = useSelectors();
 
@@ -43,7 +43,13 @@ const CallsForm: React.FC = () => {
   }, [form, paramsItem]);
   return (
     <CustomModal form={form} confirmLoading={addLoading || editLoading} width={900}>
-      <Form name="Calls Form" form={form} onFinish={onFinish} autoComplete="off" layout="vertical">
+      <Form
+        name="Dispatcher Form"
+        form={form}
+        onFinish={onFinish}
+        autoComplete="off"
+        layout="vertical"
+      >
         <div className={s.space}>
           <Form.Item
             name="last_name"
@@ -128,10 +134,10 @@ const CallsForm: React.FC = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <CallsFormMap />
+        <DispatcherFormMap />
       </Form>
     </CustomModal>
   );
 };
 
-export { CallsForm };
+export { DispatcherForm };

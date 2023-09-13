@@ -18,7 +18,7 @@ const usePostCallMutation = () => {
   return useMutation({
     mutationFn: fetchPostCall,
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ['call'] });
+      client.invalidateQueries({ queryKey: ['call-new'] });
       message.success(res.message);
     },
     onError: (err: Error) => message.error(err.message),
@@ -30,7 +30,7 @@ const useEditCallMutation = () => {
   return useMutation({
     mutationFn: fetchEditCall,
     onSuccess: (res) => {
-      client.invalidateQueries({ queryKey: ['call'] });
+      client.invalidateQueries({ queryKey: ['call-new'] });
       message.success(res.message);
     },
     onError: (err: Error) => message.error(err.message),

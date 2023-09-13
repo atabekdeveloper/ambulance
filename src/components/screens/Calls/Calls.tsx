@@ -5,7 +5,6 @@ import { useActions } from 'src/hooks';
 import { CallsBrigade } from './Cards/CallsBrigade';
 import { CallsIncoming } from './Cards/CallsIncoming';
 import { CallsProcessed } from './Cards/CallsProcessed';
-import { CallsForm } from './Form/CallsForm';
 import { CallsHead } from './Head/CallsHead';
 import { CallNotification } from './CallNotification';
 
@@ -22,7 +21,6 @@ const Call: React.FC = () => {
     <div className={s.calls}>
       <CallNotification />
       <CallsHead callType={callType} setCallType={setCallType} />
-      <CallsForm />
       {callType === 'incoming' && <CallsIncoming />}
       {callType === 'processed' && <CallsProcessed />}
       {callType === 'brigade' && <CallsBrigade />}

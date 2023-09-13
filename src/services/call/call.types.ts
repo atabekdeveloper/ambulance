@@ -15,7 +15,7 @@ export type TCallAddressItem = {
   region: string;
   street: string;
   home: string;
-  fullAddress: string;
+  full_address: string;
   place: string;
   lat: number;
   lng: number;
