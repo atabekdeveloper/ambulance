@@ -1,8 +1,8 @@
 import { notification } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
-import carError from 'src/assets/images/car/error/car-left.svg';
-import carSuccess from 'src/assets/images/car/success/car-left.svg';
+import carError from 'src/assets/images/car-error.svg';
+import carSuccess from 'src/assets/images/car-success.svg';
 import marker from 'src/assets/images/location-pin.png';
 import { UiButton } from 'src/components/ui';
 import { useSelectors } from 'src/hooks';
@@ -120,8 +120,8 @@ const CallsMap: React.FC = () => {
               options={{
                 iconLayout: 'default#image',
                 iconImageHref: brigade.statuses.some((el) => el.id === 1) ? carSuccess : carError,
-                iconImageSize: [36, 36],
-                iconImageOffset: [-18, -18],
+                iconImageSize: [48, 48],
+                iconImageOffset: [-24, -24],
               }}
               onClick={() => openNotification(brigade.id)}
             />
