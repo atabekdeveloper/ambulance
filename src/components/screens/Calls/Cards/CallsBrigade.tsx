@@ -45,11 +45,11 @@ const CallsBrigade: React.FC = () => {
                 </ul>
               </div>
               <div className={s.info}>
-                <span>Ornı</span>
+                <span>Место-ие</span>
                 <span>{el.location.place || '-'}</span>
               </div>
               <div className={s.info}>
-                <span>Shıpaker</span>
+                <span>Врач</span>
                 <span>{el.medic_name}</span>
               </div>
             </li>

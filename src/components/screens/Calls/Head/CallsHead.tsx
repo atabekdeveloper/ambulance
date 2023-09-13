@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { useActions } from 'src/hooks';
 import {
-  useGetBrigadesQuery,
   useGetNewCallsQuery,
   useGetReprocessedCallsQuery,
+  useGetRouterBrigadesQuery,
 } from 'src/services';
 
 import { TCallType } from '../calls.types';
@@ -18,7 +18,7 @@ const CallsHead: React.FC<TCallType> = ({ callType, setCallType }) => {
   const { toggleModal } = useActions();
   const { data: newCalls } = useGetNewCallsQuery();
   const { data: reprocessedCalls } = useGetReprocessedCallsQuery();
-  const { data: brigades } = useGetBrigadesQuery();
+  const { data: brigades } = useGetRouterBrigadesQuery();
   return (
     <div className={s.head}>
       <ul className={s.items}>

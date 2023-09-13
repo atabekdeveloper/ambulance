@@ -19,36 +19,36 @@ const CallsProcessed: React.FC = () => {
             <li key={el.id} className={clsx(s.item)}>
               <div className={s.info}>
                 <div className={s.text}>
-                  <span>Jańa</span>
+                  <span>Обработанный</span>
                   <span>{`№${el.call_cause_id}`}</span>
                 </div>
                 <div className={s.text}>
-                  <span>Qabıllanǵan waqtı</span>
+                  <span>Время</span>
                   <span>{el.created_at}</span>
                 </div>
                 <div className={s.text}>
-                  <span>Mánzil</span>
+                  <span>Адрес</span>
                   <span>{`${el.address.fullAddress || '-'}`}</span>
                 </div>
               </div>
               <div className={s.info}>
                 <div className={s.text}>
-                  <span>Sebepleri</span>
+                  <span>Причины</span>
                   <span>{el.call_cause_name}</span>
                 </div>
                 <div className={s.text}>
-                  <span>Tez járdem mashinası biriktirilgen</span>
+                  <span>Прикреплена машина скорой помощи</span>
                   <span>{`${el.birgade_name || '-'}`}</span>
                 </div>
               </div>
               <div className={s.btn}>
                 <CustomPopConfirm
-                  title="Shaqırıwdı biykarlaw"
+                  title="Отменить вызов"
                   onConfirm={() => deleteCall({ callId: el.id, brigadeId: el.brigade_id })}
                   placement="top"
                 >
                   <Button type="default" danger shape="round">
-                    Biykarlaw
+                    Отменить
                   </Button>
                 </CustomPopConfirm>
               </div>

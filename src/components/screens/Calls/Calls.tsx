@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { useActions } from 'src/hooks';
+import { useActions, useGetRouterBrigadesPusherQuery } from 'src/hooks';
 
 import { CallsBrigade } from './Cards/CallsBrigade';
 import { CallsIncoming } from './Cards/CallsIncoming';
@@ -17,6 +17,7 @@ const Call: React.FC = () => {
     setBrigadeLocation([]);
     setId(0);
   }, [callType]);
+  useGetRouterBrigadesPusherQuery();
   return (
     <div className={s.calls}>
       <CallsHead callType={callType} setCallType={setCallType} />

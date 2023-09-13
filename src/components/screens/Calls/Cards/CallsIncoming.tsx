@@ -31,21 +31,21 @@ const CallsIncoming: React.FC = () => {
             <li key={el.id} className={clsx(s.item, id === el.id && s.active)}>
               <div className={s.info}>
                 <div className={s.text}>
-                  <span>Jańa</span>
+                  <span>Новая</span>
                   <span>{`№${el.id}`}</span>
                 </div>
                 <div className={s.text}>
-                  <span>Qabıllanǵan waqtı</span>
+                  <span>Время</span>
                   <span>{el.created_at}</span>
                 </div>
                 <div className={s.text}>
-                  <span>Mánzil</span>
+                  <span>Адрес</span>
                   <span>{`${el.address.fullAddress || '-'}`}</span>
                 </div>
               </div>
               <div className={s.info}>
                 <div className={s.text}>
-                  <span>Sebepleri</span>
+                  <span>Причины</span>
                   <span>{el.call_cause_name}</span>
                 </div>
                 <Space>
@@ -56,7 +56,7 @@ const CallsIncoming: React.FC = () => {
                     color={el.id === id ? '#ffad31' : ''}
                   />
                   <CustomPopConfirm
-                    title="Shaqırıwdı biykarlaw"
+                    title="Отменить вызов"
                     onConfirm={() => deleteCall(el.id)}
                     placement="top"
                   >
@@ -70,7 +70,7 @@ const CallsIncoming: React.FC = () => {
                     shape="round"
                     color={el.id === id ? '#ffad31' : ''}
                   >
-                    Brigada biriktiriw
+                    Направлять бригаду
                   </UiButton>
                 </Space>
               </div>
