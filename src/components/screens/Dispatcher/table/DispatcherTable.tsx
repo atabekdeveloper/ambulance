@@ -72,7 +72,6 @@ const DispatcherTable: React.FC = () => {
       align: 'center',
       render: (_, r) => (
         <Space>
-          {/* <UiButton icon={<AiFillEye />} onClick={() => onViewPatient(r.id)} /> */}
           <UiButton color="#FFC108" icon={<MdModeEdit />} onClick={() => onEditCall(r.id)} />
           <CustomPopConfirm title={r.call_cause_name} onConfirm={() => onDeleteCall(r.id)}>
             <Button icon={<AiFillDelete />} type="primary" danger />

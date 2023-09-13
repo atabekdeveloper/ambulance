@@ -4,6 +4,7 @@ export * from './brigade/type/brigade-type.api';
 export * from './call/brigade/call-brigade.api';
 export * from './call/call.api';
 export * from './call/cause/call-cause.api';
+export * from './call/patient/call-patient.api';
 export * from './call/router/call-router.api';
 export * from './profile/profile.api';
 export * from './role/role.api';
