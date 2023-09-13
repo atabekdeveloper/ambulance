@@ -31,7 +31,6 @@ const useGetRouterBrigadesPusherQuery = () => {
 
     const handleCall = (event: any) => {
       const { data } = event;
-      console.log('Brigade', event);
       queryClient.setQueryData(['brigade-router'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
         const newArr2 = [...oldData.data].filter((el) => el.id !== data.id);
