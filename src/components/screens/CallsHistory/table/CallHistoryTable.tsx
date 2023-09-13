@@ -1,21 +1,24 @@
 import { Button, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import React from 'react';
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiFillEye } from 'react-icons/ai';
 import { MdModeEdit } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { CustomPopConfirm, CustomTable } from 'src/components/shared';
 import { UiButton } from 'src/components/ui';
 import { useActions } from 'src/hooks';
-import { useDeleteCallMutation, useGetNewCallsQuery } from 'src/services';
+import { useDeleteCallMutation, useGetCallsQuery } from 'src/services';
 import { TCallItem } from 'src/services/call/call.types';
 
-const DispatcherTable: React.FC = () => {
-  const { data: newCalls, isLoading } = useGetNewCallsQuery();
+const CallHistoryTable: React.FC = () => {
+  const navigate = useNavigate();
+
+  const { data: newCalls, isLoading } = useGetCallsQuery();
   const { mutate: deleteCall } = useDeleteCallMutation();
 
   const { setParamsItemForm, setBrigadeLocation2 } = useActions();
 
-  const onDeleteCall = (id: number) => deleteCall(id);
+  const onViewPatient = (id: number) => navigate(`/calls/${id}`);
   const onEditCall = (id: number) => {
     const findContent = newCalls?.data.find((el) => el.id === id);
     if (findContent) {
@@ -23,6 +26,7 @@ const DispatcherTable: React.FC = () => {
       setBrigadeLocation2([findContent.address.lat, findContent.address.lng]);
     }
   };
+  const onDeleteCall = (id: number) => deleteCall(id);
 
   const columns: ColumnsType<TCallItem> = [
     {
@@ -72,7 +76,7 @@ const DispatcherTable: React.FC = () => {
       align: 'center',
       render: (_, r) => (
         <Space>
-          {/* <UiButton icon={<AiFillEye />} onClick={() => onViewPatient(r.id)} /> */}
+          <UiButton icon={<AiFillEye />} onClick={() => onViewPatient(r.id)} />
           <UiButton color="#FFC108" icon={<MdModeEdit />} onClick={() => onEditCall(r.id)} />
           <CustomPopConfirm title={r.call_cause_name} onConfirm={() => onDeleteCall(r.id)}>
             <Button icon={<AiFillDelete />} type="primary" danger />
@@ -84,4 +88,4 @@ const DispatcherTable: React.FC = () => {
   return <CustomTable dataSource={newCalls?.data} columns={columns} loading={isLoading} />;
 };
 
-export { DispatcherTable };
+export { CallHistoryTable };
