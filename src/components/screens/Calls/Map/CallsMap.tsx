@@ -26,10 +26,10 @@ const CallsMap: React.FC = () => {
   const [api, contextHolder] = notification.useNotification();
 
   const { data: brigades } = useGetRouterBrigadesQuery();
-  const { mutate: addCall, isLoading } = usePostCallBrigadeMutation();
+  const { mutate: addCall, isLoading, isSuccess } = usePostCallBrigadeMutation();
 
-  const openNotification = (id: number) => {
-    const findItem = brigades?.data.find((el) => el.id === id);
+  const openNotification = (brigadeId: number) => {
+    const findItem = brigades?.data.find((el) => el.id === brigadeId);
     api.open({
       message: 'Бригада',
       key: 'updatable',
@@ -39,7 +39,7 @@ const CallsMap: React.FC = () => {
             <div className={s.left}>
               <h2>{findItem?.name}</h2>
               <ul className={s.items}>
-                {findItem?.statuses.includes({ id: 1, name: 'Bos' }) ? (
+                {findItem?.is_access ? (
                   <li className={clsx(s.status, s.free)}>Свободно</li>
                 ) : (
                   <li className={clsx(s.status, s.busy)}>Занят</li>
@@ -51,24 +51,25 @@ const CallsMap: React.FC = () => {
           <div className={s.bottom}>
             <ul className={s.items}>
               <li className={s.item}>
-                <span>Ornı</span>
+                <span>Место-ие</span>
                 <span>{findItem?.location.place}</span>
               </li>
               <li className={s.item}>
-                <span>Shıpaker</span>
+                <span>Врач</span>
                 <span>{findItem?.medic_name}</span>
               </li>
             </ul>
-            {findItem?.statuses.includes({ id: 1, name: 'Bos' }) && (
+            {findItem?.is_access && (
               <UiButton
                 shape="round"
                 block
                 loading={isLoading}
+                disabled={!id}
                 onClick={() => {
-                  addCall({ callId: Number(findItem?.call_id), brigadeId: Number(findItem?.id) });
+                  addCall({ callId: id, brigadeId: Number(findItem?.id) });
                 }}
               >
-                Jollaw
+                Направить
               </UiButton>
             )}
           </div>
@@ -78,6 +79,9 @@ const CallsMap: React.FC = () => {
       duration: 0,
     });
   };
+  React.useEffect(() => {
+    if (isSuccess) api.destroy();
+  }, [api, isSuccess]);
   return (
     <>
       {contextHolder}
@@ -115,9 +119,7 @@ const CallsMap: React.FC = () => {
               geometry={[brigade.location.lat, brigade.location.lng]}
               options={{
                 iconLayout: 'default#image',
-                iconImageHref: brigade.statuses.includes({ name: 'Bos', id: 1 })
-                  ? carSuccess
-                  : carError,
+                iconImageHref: brigade.statuses.some((el) => el.id === 1) ? carSuccess : carError,
                 iconImageSize: [36, 36],
                 iconImageOffset: [-18, -18],
               }}

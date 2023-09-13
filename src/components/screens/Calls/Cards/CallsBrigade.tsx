@@ -34,12 +34,16 @@ const CallsBrigade: React.FC = () => {
                       key={status.id}
                       className={clsx(
                         s.status,
-                        status.name === 'Bos' && s.free,
-                        status.name === 'Bánt' && s.busy,
-                        status.name === 'Túslik' && s.lunch,
+                        status.id === 1 && s.free,
+                        status.id === 2 && s.busy,
+                        status.id === 3 && s.lunch,
                       )}
                     >
-                      {status.name}
+                      {clsx(
+                        status.id === 1 && 'Свободно',
+                        status.id === 2 && 'Занят',
+                        status.id === 3 && 'Без обеда',
+                      )}
                     </li>
                   ))}
                 </ul>

@@ -13,8 +13,10 @@ const useGetRouterNewCallsPusherQuery = () => {
     const pusher = new Pusher('a19af38bf0ee06f0149f', {
       cluster: 'eu',
     });
+
     const channel = pusher.subscribe('call');
-    channel.bind('CallSent', (event: any) => {
+
+    const handleCall = (event: any) => {
       const { data } = event;
       queryClient.setQueryData(['call-new'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
@@ -27,7 +29,14 @@ const useGetRouterNewCallsPusherQuery = () => {
         }, []);
         return { data: event.method === 'DELETE' ? newArr2 : result };
       });
-    });
+    };
+
+    channel.bind('CallSent', handleCall);
+
+    return () => {
+      channel.unbind('CallSent', handleCall);
+      pusher.unsubscribe('call');
+    };
   }, [queryClient]);
 };
 
@@ -37,8 +46,10 @@ const useGetRouterReprocessedCallsPusherQuery = () => {
     const pusher = new Pusher('a19af38bf0ee06f0149f', {
       cluster: 'eu',
     });
+
     const channel = pusher.subscribe('call-reprocessed');
-    channel.bind('CallReprocessedSent', (event: any) => {
+
+    const handleCall = (event: any) => {
       const { data } = event;
       queryClient.setQueryData(['call-reprocessed'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
@@ -51,7 +62,14 @@ const useGetRouterReprocessedCallsPusherQuery = () => {
         }, []);
         return { data: event.method === 'DELETE' ? newArr2 : result };
       });
-    });
+    };
+
+    channel.bind('CallReprocessedSent', handleCall);
+
+    return () => {
+      channel.unbind('CallReprocessedSent', handleCall);
+      pusher.unsubscribe('call-reprocessed');
+    };
   }, [queryClient]);
 };
 

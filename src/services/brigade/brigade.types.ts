@@ -1,3 +1,5 @@
+import { TGetParamItem } from '../index.types';
+
 export type TBrigadeItem = {
   id: number;
   name: string;
@@ -15,10 +17,8 @@ export type TBrigadeRouterItem = {
   user_phone: string;
   vehicle_number: string;
   call_id: number;
-  statuses: {
-    id: number;
-    name: string;
-  }[];
+  statuses: TGetParamItem[];
+  is_access: boolean;
   location: TBrigadeRouterLocation;
 };
 export type TBrigadeRouterLocation = {

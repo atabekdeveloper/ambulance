@@ -26,9 +26,12 @@ const useGetRouterBrigadesPusherQuery = () => {
     const pusher = new Pusher('a19af38bf0ee06f0149f', {
       cluster: 'eu',
     });
+
     const channel = pusher.subscribe('location');
-    channel.bind('LocationSent', (event: any) => {
+
+    const handleCall = (event: any) => {
       const { data } = event;
+      console.log('Brigade', event);
       queryClient.setQueryData(['brigade-router'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
         const newArr2 = [...oldData.data].filter((el) => el.id !== data.id);
@@ -38,9 +41,16 @@ const useGetRouterBrigadesPusherQuery = () => {
           }
           return unique;
         }, []);
-        return { data: event.method === 'DELETE' ? newArr2 : result };
+        return { data: result };
       });
-    });
+    };
+
+    channel.bind('LocationSent', handleCall);
+
+    return () => {
+      channel.unbind('LocationSent', handleCall);
+      pusher.unsubscribe('location');
+    };
   }, [queryClient]);
 };
 

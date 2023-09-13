@@ -8,7 +8,7 @@ export type TCallItem = {
   comment: string;
   created_at: string;
   address: TCallAddressItem;
-  birgade_name: string;
+  brigade_name: string;
   brigade_id: number;
 };
 export type TCallAddressItem = {

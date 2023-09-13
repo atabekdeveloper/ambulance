@@ -20,7 +20,7 @@ const CallsProcessed: React.FC = () => {
               <div className={s.info}>
                 <div className={s.text}>
                   <span>Обработанный</span>
-                  <span>{`№${el.call_cause_id}`}</span>
+                  <span>{`№${el.id}`}</span>
                 </div>
                 <div className={s.text}>
                   <span>Время</span>
@@ -38,7 +38,7 @@ const CallsProcessed: React.FC = () => {
                 </div>
                 <div className={s.text}>
                   <span>Прикреплена машина скорой помощи</span>
-                  <span>{`${el.birgade_name || '-'}`}</span>
+                  <span>{`${el.brigade_name || '-'}`}</span>
                 </div>
               </div>
               <div className={s.btn}>
