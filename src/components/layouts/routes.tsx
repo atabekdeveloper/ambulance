@@ -1,15 +1,16 @@
 import { MenuProps } from 'antd';
-import { BiSolidContact } from 'react-icons/bi';
-import { BsFillTelephoneInboundFill } from 'react-icons/bs';
+import { FiPhoneIncoming } from 'react-icons/fi';
 import { LiaAmbulanceSolid } from 'react-icons/lia';
+import { LuPhoneCall } from 'react-icons/lu';
 import { PiUsersBold } from 'react-icons/pi';
 import { RiUserVoiceLine } from 'react-icons/ri';
+import { TbReplace } from 'react-icons/tb';
 
 export const routes: MenuProps['items'] = [
   {
     key: '/incoming',
     label: 'Входящий',
-    icon: <BsFillTelephoneInboundFill />,
+    icon: <FiPhoneIncoming />,
   },
   {
     key: '/brigade',
@@ -24,7 +25,12 @@ export const routes: MenuProps['items'] = [
   {
     key: '/calls',
     label: 'Вызовы',
-    icon: <BiSolidContact />,
+    icon: <LuPhoneCall />,
+  },
+  {
+    key: '/shift',
+    label: 'Смена',
+    icon: <TbReplace />,
   },
   {
     key: '/users',

@@ -4,6 +4,7 @@ import {
   CallsHistory,
   Dispatcher,
   Home,
+  NotFound,
   Patient,
   Users,
 } from 'src/components/screens';
@@ -16,5 +17,6 @@ const routes = [
   { path: '/users', element: <Users /> },
   { path: '/brigade', element: <Brigade /> },
   { path: '/dispatcher', element: <Dispatcher /> },
+  { path: '*', element: <NotFound /> },
 ];
 export { routes };
