@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('src/assets/images/login.jpg') no-repeat center;
+  background: url('src/assets/images/login.jpg') no-repeat center / cover;
   .body {
     max-width: 350px;
     width: 100%;
