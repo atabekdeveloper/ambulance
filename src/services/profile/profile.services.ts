@@ -1,6 +1,5 @@
 import { api } from 'src/api';
-
-import { SRO, TMessage } from '../index.types';
+import { SRO, TMessage } from 'src/services/index.types';
 
 import { TEditProfile, TProfileItem } from './profile.types';
 

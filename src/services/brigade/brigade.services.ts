@@ -1,6 +1,5 @@
 import { api } from 'src/api';
-
-import { SR, SRO, TMessage } from '../index.types';
+import { SR, SRO, TMessage } from 'src/services/index.types';
 
 import { TBrigadeChange, TBrigadeItem, TBrigadeRouterItem } from './brigade.types';
 

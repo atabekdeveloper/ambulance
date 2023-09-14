@@ -1,6 +1,5 @@
 import { api } from 'src/api';
-
-import { SRO } from '../index.types';
+import { SRO } from 'src/services/index.types';
 
 import { TAuthLogin, TAuthLoginGet } from './auth.types';
 

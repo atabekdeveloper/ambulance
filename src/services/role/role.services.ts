@@ -1,6 +1,5 @@
 import { api } from 'src/api';
-
-import { SR } from '../index.types';
+import { SR } from 'src/services/index.types';
 
 import { TRoleItem } from './role.types';
 

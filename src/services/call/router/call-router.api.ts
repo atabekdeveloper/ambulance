@@ -18,6 +18,7 @@ const useGetRouterNewCallsPusherQuery = () => {
 
     const handleCall = (event: any) => {
       const { data } = event;
+      queryClient.invalidateQueries({ queryKey: ['call'] });
       queryClient.setQueryData(['call-new'], (oldData: any) => {
         const newArr = [data, ...oldData.data];
         const newArr2 = [...oldData.data].filter((el) => el.id !== data.id);

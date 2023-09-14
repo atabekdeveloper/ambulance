@@ -33,7 +33,10 @@ const PatientForm: React.FC = () => {
   };
   React.useEffect(() => {
     if (paramsItem) {
-      form.setFieldsValue({ ...paramsItem, birthday: dayjs(paramsItem.birthday, dateFormat2) });
+      form.setFieldsValue({
+        ...paramsItem,
+        birthday: paramsItem.birthday ? dayjs(paramsItem.birthday) : '',
+      });
     }
   }, [paramsItem, form]);
   return (

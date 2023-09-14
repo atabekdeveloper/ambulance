@@ -6,4 +6,5 @@ export * from './Dispatcher/Dispatcher';
 export * from './Home/Home';
 export * from './NotFound/NotFound';
 export * from './Patient/Patient';
+export * from './Shift/Shift';
 export * from './Users/Users';

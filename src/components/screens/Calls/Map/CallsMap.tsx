@@ -28,6 +28,8 @@ const CallsMap: React.FC = () => {
   const { data: brigades } = useGetRouterBrigadesQuery();
   const { mutate: addCall, isLoading, isSuccess } = usePostCallBrigadeMutation();
 
+  const onAddCall = (brigadeId: number) => addCall({ callId: id, brigadeId });
+
   const openNotification = (brigadeId: number) => {
     const findItem = brigades?.data.find((el) => el.id === brigadeId);
     api.open({
@@ -59,19 +61,16 @@ const CallsMap: React.FC = () => {
                 <span>{findItem?.medic_name}</span>
               </li>
             </ul>
-            {findItem?.is_access && (
-              <UiButton
-                shape="round"
-                block
-                loading={isLoading}
-                disabled={!id}
-                onClick={() => {
-                  addCall({ callId: id, brigadeId: Number(findItem?.id) });
-                }}
-              >
-                Направить
-              </UiButton>
-            )}
+            <UiButton
+              shape="round"
+              block
+              loading={isLoading}
+              hidden={!findItem?.is_access}
+              disabled={!id}
+              onClick={() => onAddCall(Number(findItem?.id))}
+            >
+              Направить
+            </UiButton>
           </div>
         </div>
       ),

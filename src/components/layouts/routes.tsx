@@ -29,7 +29,7 @@ export const routes: MenuProps['items'] = [
   },
   {
     key: '/shift',
-    label: 'Смена',
+    label: 'Смены',
     icon: <TbReplace />,
   },
   {

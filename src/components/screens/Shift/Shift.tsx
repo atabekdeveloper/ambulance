@@ -3,28 +3,25 @@ import React from 'react';
 import { Head } from 'src/components/shared';
 import { useActions } from 'src/hooks';
 
-import { CallNotification } from '../Calls/CallNotification';
+import { ShiftForm } from './form/ShiftForm';
+import { ShiftTable } from './table/ShiftTable';
 
-import { DispatcherForm } from './form/DispatcherForm';
-import { DispatcherTable } from './table/DispatcherTable';
-
-const Dispatcher: React.FC = () => {
+const Shift: React.FC = () => {
   const { toggleModal } = useActions();
   return (
     <>
       <Head
-        title="Диспетчер / Вызовы"
+        title="Смены"
         childs={[
           <Button type="primary" onClick={() => toggleModal()}>
             Добавить
           </Button>,
         ]}
       />
-      <CallNotification />
-      <DispatcherForm />
-      <DispatcherTable />
+      <ShiftForm />
+      <ShiftTable />
     </>
   );
 };
 
-export { Dispatcher };
+export { Shift };

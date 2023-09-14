@@ -8,4 +8,5 @@ export * from './call/patient/call-patient.api';
 export * from './call/router/call-router.api';
 export * from './profile/profile.api';
 export * from './role/role.api';
+export * from './shift/shift.api';
 export * from './user/user.api';
