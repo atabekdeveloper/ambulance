@@ -25,7 +25,7 @@ const AuthLogin: React.FC = () => {
     if (isSuccess) {
       signIn({ token: loginData.data.token, role: loginData.data.user.role_name });
       form.resetFields();
-      navigate('/calls');
+      navigate('/incoming');
     }
   }, [isSuccess]);
   return (

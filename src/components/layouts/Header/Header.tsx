@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   const { toggleMenuCollapsed, toggleDrawer } = useActions();
   const { isMobile } = useResponsive(900);
 
-  const homeNavigate = () => navigate('/');
+  const homeNavigate = () => navigate('/incoming');
   const onToggleDrawer = () => {
     if (isMobile) toggleDrawer();
     else toggleMenuCollapsed();

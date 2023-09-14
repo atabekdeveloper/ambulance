@@ -3,14 +3,12 @@ import {
   Call,
   CallsHistory,
   Dispatcher,
-  Home,
   NotFound,
   Patient,
   Users,
 } from 'src/components/screens';
 
 const routes = [
-  { path: '/', element: <Home /> },
   { path: '/incoming', element: <Call /> },
   { path: '/calls', element: <CallsHistory /> },
   { path: '/calls/:callId', element: <Patient /> },

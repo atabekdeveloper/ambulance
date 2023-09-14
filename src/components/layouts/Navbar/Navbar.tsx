@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
       mask={isMobile}
     >
       <div className={s.menu}>
-        <div className={s.logo} onClick={() => navigate('/')}>
+        <div className={s.logo} onClick={() => navigate('/incoming')}>
           <Img className={s.img} src={logo} alt="Logo" />
         </div>
         <NavbarMenu items={routes} />
