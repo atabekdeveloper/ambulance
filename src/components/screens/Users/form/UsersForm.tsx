@@ -21,7 +21,7 @@ const UsersForm: React.FC = () => {
     } else addUser({ ...values, phone: formatStringJoin(values.phone) });
   };
   React.useEffect(() => {
-    if (paramsItem) form.setFieldsValue({ ...paramsItem, group: paramsItem.group?.id });
+    if (paramsItem) form.setFieldsValue(paramsItem);
   }, [paramsItem, form]);
   return (
     <CustomModal form={form} confirmLoading={addLoading || editLoading}>

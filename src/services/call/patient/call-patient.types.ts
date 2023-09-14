@@ -6,4 +6,9 @@ export type TCallPatientItem = {
   birthday: string;
   gender: string;
   description: string;
+  callId?: number;
+};
+export type TCallPatientDeleteParams = {
+  callId: number;
+  patientId: number;
 };

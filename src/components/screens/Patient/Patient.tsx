@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Head } from 'src/components/shared';
 import { useActions } from 'src/hooks';
 
+import { PatientForm } from './form/PatientForm';
 import { PatientTable } from './table/PatientTable';
 
 const Patient: React.FC = () => {
@@ -22,6 +23,7 @@ const Patient: React.FC = () => {
           </Button>,
         ]}
       />
+      <PatientForm />
       <PatientTable />
     </>
   );

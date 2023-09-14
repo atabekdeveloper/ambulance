@@ -1,7 +1,7 @@
 import { api } from 'src/api';
 import { SR, SRO, TMessage } from 'src/services/index.types';
 
-import { TCallPatientItem } from './call-patient.types';
+import { TCallPatientDeleteParams, TCallPatientItem } from './call-patient.types';
 
 export const fetchGetCallPatient = async (id: number): Promise<SR<TCallPatientItem>> => {
   const res = await api.get(`/calls/${id}/patients`);
@@ -10,16 +10,18 @@ export const fetchGetCallPatient = async (id: number): Promise<SR<TCallPatientIt
 export const fetchPostCallPatient = async (
   values: TCallPatientItem,
 ): Promise<SRO<TCallPatientItem>> => {
-  const res = await api.post(`/calls/${values.id}/patients`, values);
+  const res = await api.post(`/calls/${values.callId}/patients`, values);
   return res.data;
 };
 export const fetchEditCallPatient = async (
   values: TCallPatientItem,
 ): Promise<SRO<TCallPatientItem>> => {
-  const res = await api.put(`/calls/${values.id}/patients`, values);
+  const res = await api.put(`/calls/${values.callId}/patients/${values.id}`, values);
   return res.data;
 };
-export const fetchDeleteCallPatient = async (id: number): Promise<TMessage> => {
-  const res = await api.delete(`/calls/${id}/patients`);
+export const fetchDeleteCallPatient = async (
+  values: TCallPatientDeleteParams,
+): Promise<TMessage> => {
+  const res = await api.delete(`/calls/${values.callId}/patients/${values.patientId}`);
   return res.data;
 };

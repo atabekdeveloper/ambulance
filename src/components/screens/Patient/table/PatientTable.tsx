@@ -1,5 +1,7 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { Button, Space } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import clsx from 'clsx';
 import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { MdModeEdit } from 'react-icons/md';
@@ -11,16 +13,16 @@ import { useDeleteCallPatientMutation, useGetCallPatientsQuery } from 'src/servi
 import { TCallPatientItem } from 'src/services/call/patient/call-patient.types';
 
 const PatientTable: React.FC = () => {
-  const { id } = useParams();
-  const { data: callPatients, isLoading } = useGetCallPatientsQuery(Number(id));
+  const { callId } = useParams();
+  const { data: callPatients, isLoading } = useGetCallPatientsQuery(Number(callId));
   const { mutate: deletePatient } = useDeleteCallPatientMutation();
 
   const { setParamsItemForm } = useActions();
 
-  const onDeletePatient = (id: number) => deletePatient(id);
+  const onDeletePatient = (id: number) => deletePatient({ callId: Number(callId), patientId: id });
   const onEditPatient = (id: number) => {
     const findContent = callPatients?.data.find((el) => el.id === id);
-    if (findContent) setParamsItemForm(findContent);
+    if (findContent) setParamsItemForm({ ...findContent, callId });
   };
 
   const columns: ColumnsType<TCallPatientItem> = [
@@ -52,7 +54,8 @@ const PatientTable: React.FC = () => {
       title: 'Пол',
       dataIndex: 'gender',
       key: 'gender',
-      render: (value) => (value === 'male' ? 'Мужчина' : 'Женщина'),
+      render: (value) =>
+        clsx(value === 'female' && 'Женщина', value === 'male' && 'Мужчина', !value && '-'),
     },
     {
       title: 'Описания',
