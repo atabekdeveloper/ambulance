@@ -13,7 +13,7 @@ import {
 const useGetCallPatientsQuery = (id: number) =>
   useQuery({
     queryFn: () => fetchGetCallPatient(id),
-    queryKey: ['call-patient'],
+    queryKey: ['call-patient', id],
     onError: (err: Error) => message.error(err.message),
   });
 

@@ -39,7 +39,9 @@ const CallHistoryForm: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (paramsItem) form.setFieldsValue({ ...paramsItem, ...paramsItem.address });
+    if (paramsItem) {
+      form.setFieldsValue({ ...paramsItem, ...paramsItem.address, ...paramsItem.patient });
+    }
   }, [form, paramsItem]);
   return (
     <CustomModal form={form} confirmLoading={addLoading || editLoading} width={900}>

@@ -1,3 +1,5 @@
+import { TCallPatientItem } from './patient/call-patient.types';
+
 export type TCallItem = {
   id: number;
   call_cause_id: number;
@@ -10,6 +12,7 @@ export type TCallItem = {
   address: TCallAddressItem;
   brigade_name: string;
   brigade_id: number;
+  patient: TCallPatientItem;
 };
 export type TCallAddressItem = {
   region: string;

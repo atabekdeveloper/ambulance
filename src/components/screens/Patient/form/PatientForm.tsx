@@ -2,6 +2,7 @@
 import { DatePicker, DatePickerProps, Form, Input, Select } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { CustomModal } from 'src/components/shared';
 import { useSelectors } from 'src/hooks';
 import { useEditCallPatientMutation, usePostCallPatientMutation } from 'src/services';
@@ -11,6 +12,7 @@ import { formMessage } from 'src/utils';
 
 const PatientForm: React.FC = () => {
   const [form] = Form.useForm();
+  const { callId } = useParams();
   const { paramsItem } = useSelectors();
   const [birthdayDate, setBirthdayDate] = React.useState('');
 
@@ -29,7 +31,7 @@ const PatientForm: React.FC = () => {
         id: paramsItem.id,
         callId: paramsItem.callId,
       });
-    } else addPatient({ ...values, birthday: birthdayDate });
+    } else addPatient({ ...values, birthday: birthdayDate, callId: Number(callId) });
   };
   React.useEffect(() => {
     if (paramsItem) {
