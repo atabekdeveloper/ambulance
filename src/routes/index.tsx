@@ -10,7 +10,7 @@ import {
 } from 'src/components/screens';
 
 const routes = [
-  { path: '/incoming', element: <Call /> },
+  { path: '/', element: <Call /> },
   { path: '/calls', element: <CallsHistory /> },
   { path: '/calls/:callId', element: <Patient /> },
   { path: '/users', element: <Users /> },

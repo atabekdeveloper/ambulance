@@ -14,7 +14,7 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   React.useEffect(() => {
-    if (token && pathname === '/login') navigate('/incoming');
+    if (token && pathname === '/login') navigate('/');
   }, [navigate, pathname, token]);
   return (
     <div className="app">

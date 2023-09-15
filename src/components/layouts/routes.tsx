@@ -8,7 +8,7 @@ import { TbReplace } from 'react-icons/tb';
 
 export const routes: MenuProps['items'] = [
   {
-    key: '/incoming',
+    key: '/',
     label: 'Входящий',
     icon: <FiPhoneIncoming />,
   },
