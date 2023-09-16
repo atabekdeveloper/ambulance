@@ -14,7 +14,7 @@ const useGetCallCausesQuery = () =>
   useQuery({
     queryFn: () => fetchGetCallCauses(),
     queryKey: ['call-cause'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostCallCauseMutation = () => {
@@ -25,7 +25,7 @@ const usePostCallCauseMutation = () => {
       client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -37,7 +37,7 @@ const useEditCallCauseMutation = () => {
       client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -49,7 +49,7 @@ const useDeleteCallCauseMutation = () => {
       client.invalidateQueries({ queryKey: ['call-cause'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 export {

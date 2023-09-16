@@ -12,7 +12,7 @@ const useAuthLoginMutation = () => {
       client.invalidateQueries({ queryKey: ['auth'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

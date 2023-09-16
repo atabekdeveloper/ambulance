@@ -25,7 +25,7 @@ const useEditProfileMutation = () => {
       client.invalidateQueries({ queryKey: ['profile'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

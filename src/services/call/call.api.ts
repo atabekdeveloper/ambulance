@@ -10,7 +10,7 @@ const useGetCallsQuery = () =>
   useQuery({
     queryFn: () => fetchGetCalls(),
     queryKey: ['call'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostCallMutation = () => {
@@ -21,7 +21,7 @@ const usePostCallMutation = () => {
       client.invalidateQueries({ queryKey: ['call-new'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -33,7 +33,7 @@ const useEditCallMutation = () => {
       client.invalidateQueries({ queryKey: ['call-new'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -45,7 +45,7 @@ const useDeleteCallMutation = () => {
       client.invalidateQueries({ queryKey: ['call'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

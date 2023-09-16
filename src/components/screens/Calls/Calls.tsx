@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { useActions } from 'src/hooks';
@@ -12,9 +13,11 @@ import s from './calls.module.scss';
 
 const Call: React.FC = () => {
   const [callType, setCallType] = React.useState('incoming');
-  const { setBrigadeLocation, setId } = useActions();
+  const { setBrigadeLocation, setId, setMarkerIncoming, setBrigadeLocation2 } = useActions();
   React.useEffect(() => {
     setBrigadeLocation([]);
+    setBrigadeLocation2([]);
+    setMarkerIncoming(false);
     setId(0);
   }, [callType]);
   return (

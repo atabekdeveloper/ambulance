@@ -17,7 +17,7 @@ const useGetBrigadesQuery = () =>
   useQuery({
     queryFn: () => fetchGetBrigades(),
     queryKey: ['brigade'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const useGetRouterBrigadesPusherQuery = () => {
@@ -58,7 +58,7 @@ const useGetRouterBrigadesQuery = () => {
   return useQuery({
     queryFn: () => fetchGetRouteBrigades(),
     queryKey: ['brigade-router'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -70,7 +70,7 @@ const usePostBrigadeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -82,7 +82,7 @@ const useEditBrigadeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -94,7 +94,7 @@ const useDeleteBrigadeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

@@ -4,7 +4,8 @@ import { IBrigadeState } from './brigade.types';
 
 const initialState: IBrigadeState = {
   location: [42.474037, 59.617937],
-  location2: [],
+  location2: [42.474037, 59.617937],
+  markerIncomig: false,
 };
 
 const brigadeSlice = createSlice({
@@ -12,11 +13,20 @@ const brigadeSlice = createSlice({
   initialState,
   reducers: {
     setBrigadeLocation(state, { payload }: PayloadAction<number[]>) {
-      if (payload.length) state.location = payload;
-      else state.location = [42.474037, 59.617937];
+      if (payload[0]) {
+        state.location = payload;
+        state.markerIncomig = true;
+      } else {
+        state.location = [42.474037, 59.617937];
+        state.markerIncomig = false;
+      }
     },
     setBrigadeLocation2(state, { payload }: PayloadAction<number[]>) {
-      state.location2 = payload;
+      if (payload[0]) state.location2 = payload;
+      else state.location2 = [42.474037, 59.617937];
+    },
+    setMarkerIncoming(state, { payload }: PayloadAction<boolean>) {
+      state.markerIncomig = payload;
     },
   },
 });

@@ -14,7 +14,7 @@ const useGetBrigadeTypesQuery = () =>
   useQuery({
     queryFn: () => fetchGetBrigadeTypes(),
     queryKey: ['brigade-type'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostBrigadeTypeMutation = () => {
@@ -25,7 +25,7 @@ const usePostBrigadeTypeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade-type'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -37,7 +37,7 @@ const useEditBrigadeTypeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade-type'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -49,7 +49,7 @@ const useDeleteBrigadeTypeMutation = () => {
       client.invalidateQueries({ queryKey: ['brigade-type'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

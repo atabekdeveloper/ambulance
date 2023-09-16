@@ -14,7 +14,7 @@ const useGetCallPatientsQuery = (id: number) =>
   useQuery({
     queryFn: () => fetchGetCallPatient(id),
     queryKey: ['call-patient', id],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostCallPatientMutation = () => {
@@ -25,7 +25,7 @@ const usePostCallPatientMutation = () => {
       client.invalidateQueries({ queryKey: ['call-patient'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -37,7 +37,7 @@ const useEditCallPatientMutation = () => {
       client.invalidateQueries({ queryKey: ['call-patient'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -49,7 +49,7 @@ const useDeleteCallPatientMutation = () => {
       client.invalidateQueries({ queryKey: ['call-patient'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

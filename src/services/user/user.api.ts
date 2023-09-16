@@ -10,7 +10,7 @@ const useGetUsersQuery = () =>
   useQuery({
     queryFn: () => fetchGetUsers(),
     queryKey: ['user'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostUserMutation = () => {
@@ -21,7 +21,7 @@ const usePostUserMutation = () => {
       client.invalidateQueries({ queryKey: ['user'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -33,7 +33,7 @@ const useEditUserMutation = () => {
       client.invalidateQueries({ queryKey: ['user'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -45,7 +45,7 @@ const useDeleteUserMutation = () => {
       client.invalidateQueries({ queryKey: ['user'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

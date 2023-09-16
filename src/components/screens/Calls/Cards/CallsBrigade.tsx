@@ -12,7 +12,7 @@ import s from './cards.module.scss';
 
 const CallsBrigade: React.FC = () => {
   const { data: brigades, isSuccess } = useGetRouterBrigadesQuery();
-  const { setBrigadeLocation } = useActions();
+  const { setBrigadeLocation2 } = useActions();
   return (
     <div className={clsx(s.card, s.brigade)}>
       <ul className={s.brigadeItems}>
@@ -21,7 +21,7 @@ const CallsBrigade: React.FC = () => {
             <li
               key={el.id}
               className={clsx(s.item)}
-              onClick={() => setBrigadeLocation([el.location.lat, el.location.lng])}
+              onClick={() => setBrigadeLocation2([el.location.lat, el.location.lng])}
             >
               <div className={s.top}>
                 <div className={s.head}>

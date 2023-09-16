@@ -9,7 +9,7 @@ const useGetRolesQuery = () =>
   useQuery({
     queryFn: () => fetchGetRoles(),
     queryKey: ['role'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 export { useGetRolesQuery };

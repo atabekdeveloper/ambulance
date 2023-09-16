@@ -79,7 +79,7 @@ const useGetNewCallsQuery = () => {
   return useQuery({
     queryFn: () => fetchGetNewCalls(),
     queryKey: ['call-new'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 const useGetReprocessedCallsQuery = () => {
@@ -87,7 +87,7 @@ const useGetReprocessedCallsQuery = () => {
   return useQuery({
     queryFn: () => fetchGetReprocessedCalls(),
     queryKey: ['call-reprocessed'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

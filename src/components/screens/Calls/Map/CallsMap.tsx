@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 import { notification } from 'antd';
 import clsx from 'clsx';
 import React from 'react';
@@ -22,7 +23,7 @@ import {
 import s from './map.module.scss';
 
 const CallsMap: React.FC = () => {
-  const { location, id } = useSelectors();
+  const { location, id, markerIncomig, location2 } = useSelectors();
   const [api, contextHolder] = notification.useNotification();
 
   const { data: brigades } = useGetRouterBrigadesQuery();
@@ -86,7 +87,7 @@ const CallsMap: React.FC = () => {
       {contextHolder}
       <Map
         state={{
-          center: location,
+          center: id ? location : location2,
           zoom: 15,
         }}
         className={s.map}
@@ -103,7 +104,7 @@ const CallsMap: React.FC = () => {
             iconImageHref: marker,
             iconImageSize: [32, 32],
             iconImageOffset: [-16, -16],
-            visible: !!id,
+            visible: markerIncomig,
           }}
         />
         <Clusterer

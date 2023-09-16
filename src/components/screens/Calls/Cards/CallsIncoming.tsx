@@ -11,7 +11,7 @@ import s from './cards.module.scss';
 
 const CallsIncoming: React.FC = () => {
   const { id } = useSelectors();
-  const { setId, setBrigadeLocation2 } = useActions();
+  const { setId, setBrigadeLocation } = useActions();
   const { data: newCalls, isSuccess } = useGetNewCallsQuery();
   return (
     <div className={clsx(s.card, s.incoming)}>
@@ -41,7 +41,7 @@ const CallsIncoming: React.FC = () => {
                 <UiButton
                   onClick={() => {
                     setId(el.id);
-                    setBrigadeLocation2([el.address.lat, el.address.lng]);
+                    setBrigadeLocation([el.address.lat, el.address.lng]);
                   }}
                   shape="round"
                   color={el.id === id ? '#ffad31' : ''}

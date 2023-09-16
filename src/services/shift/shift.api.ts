@@ -10,7 +10,7 @@ const useGetShiftsQuery = () =>
   useQuery({
     queryFn: () => fetchGetShifts(),
     queryKey: ['shift'],
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 
 const usePostShiftMutation = () => {
@@ -21,7 +21,7 @@ const usePostShiftMutation = () => {
       client.invalidateQueries({ queryKey: ['shift'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -33,7 +33,7 @@ const useEditShiftMutation = () => {
       client.invalidateQueries({ queryKey: ['shift'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 
@@ -45,7 +45,7 @@ const useDeleteShiftMutation = () => {
       client.invalidateQueries({ queryKey: ['shift'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 

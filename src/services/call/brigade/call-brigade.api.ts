@@ -12,7 +12,7 @@ const usePostCallBrigadeMutation = () => {
       client.invalidateQueries({ queryKey: ['call-brigade'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 const useDeleteCallBrigadeMutation = () => {
@@ -23,7 +23,7 @@ const useDeleteCallBrigadeMutation = () => {
       client.invalidateQueries({ queryKey: ['call-brigade'] });
       message.success(res.message);
     },
-    onError: (err: Error) => message.error(err.message),
+    onError: (err: any) => message.error(err.response.data.message),
   });
 };
 export { useDeleteCallBrigadeMutation, usePostCallBrigadeMutation };
