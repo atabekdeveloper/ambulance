@@ -13,7 +13,7 @@ import s from './form.module.scss';
 
 const CallHistoryForm: React.FC = () => {
   const [form] = Form.useForm();
-  const { paramsItem, location2 } = useSelectors();
+  const { paramsItem, location, markerIncomig } = useSelectors();
 
   const { data: callCauses } = useGetCallCausesQuery();
   const { mutate: addCall, isLoading: addLoading } = usePostCallMutation();
@@ -25,15 +25,15 @@ const CallHistoryForm: React.FC = () => {
         ...values,
         id: paramsItem.id,
         phone: formatStringJoin(values.phone),
-        lat: location2[0] || null,
-        lng: location2[1] || null,
+        lat: markerIncomig ? location[0] : null,
+        lng: markerIncomig ? location[1] : null,
       });
     } else {
       addCall({
         ...values,
         phone: formatStringJoin(values.phone),
-        lat: location2[0] || null,
-        lng: location2[1] || null,
+        lat: markerIncomig ? location[0] : null,
+        lng: markerIncomig ? location[1] : null,
       });
     }
   };

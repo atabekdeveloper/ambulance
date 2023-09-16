@@ -16,14 +16,14 @@ const CallHistoryTable: React.FC = () => {
   const { data: newCalls, isLoading } = useGetCallsQuery();
   const { mutate: deleteCall } = useDeleteCallMutation();
 
-  const { setParamsItemForm, setBrigadeLocation2 } = useActions();
+  const { setParamsItemForm, setBrigadeLocation } = useActions();
 
   const onViewPatient = (id: number) => navigate(`/calls/${id}`);
   const onEditCall = (id: number) => {
     const findContent = newCalls?.data.find((el) => el.id === id);
     if (findContent) {
       setParamsItemForm(findContent);
-      setBrigadeLocation2([findContent.address.lat, findContent.address.lng]);
+      setBrigadeLocation([findContent.address.lat, findContent.address.lng]);
     }
   };
   const onDeleteCall = (id: number) => deleteCall(id);
