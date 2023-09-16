@@ -1,12 +1,14 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { notification } from 'antd';
+import { useSnackbar } from 'notistack';
 import Pusher from 'pusher-js';
 import React from 'react';
 import sound from 'src/assets/audio/wrong-answer-129254.mp3';
 import useSound from 'use-sound';
 
+import s from './calls.module.scss';
+
 const CallNotification: React.FC = React.memo(() => {
   const [play] = useSound(sound);
+  const { enqueueSnackbar } = useSnackbar();
 
   React.useEffect(() => {
     const pusher = new Pusher('a19af38bf0ee06f0149f', {
@@ -20,17 +22,27 @@ const CallNotification: React.FC = React.memo(() => {
       play();
 
       if (success) {
-        notification.success({
-          message: data.call_status_name,
-          description: data.call_full_address,
-          placement: 'bottomRight',
-        });
+        enqueueSnackbar(
+          <div className={s.notification}>
+            <h3>{data.call_status_name}</h3>
+            <p>{data.call_full_address}</p>
+          </div>,
+          {
+            variant: 'success',
+            anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+          },
+        );
       } else {
-        notification.error({
-          message: data.call_status_name,
-          description: data.call_full_address,
-          placement: 'bottomRight',
-        });
+        enqueueSnackbar(
+          <div className={s.notification}>
+            <h3>{data.call_status_name}</h3>
+            <p>{data.call_full_address}</p>
+          </div>,
+          {
+            variant: 'error',
+            anchorOrigin: { horizontal: 'right', vertical: 'bottom' },
+          },
+        );
       }
     };
 
@@ -40,7 +52,7 @@ const CallNotification: React.FC = React.memo(() => {
       channel.unbind('CallNotificationSent', handleCallNotification);
       pusher.unsubscribe('call-notification');
     };
-  }, [play]);
+  }, [enqueueSnackbar, play]);
 
   return <div />;
 });

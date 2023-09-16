@@ -5,6 +5,7 @@ import localeData from 'dayjs/plugin/localeData';
 import weekday from 'dayjs/plugin/weekday';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import weekYear from 'dayjs/plugin/weekYear';
+import { SnackbarProvider } from 'notistack';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -41,7 +42,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <QueryClientProvider client={client}>
       <YMaps query={{ apikey: yandexApi }}>
         <Router>
-          <App />
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         </Router>
       </YMaps>
