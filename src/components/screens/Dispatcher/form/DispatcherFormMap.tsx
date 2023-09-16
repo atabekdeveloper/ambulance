@@ -14,20 +14,20 @@ import {
 import s from './form.module.scss';
 
 const DispatcherFormMap: React.FC = () => {
-  const { location, location2 } = useSelectors();
-  const { setBrigadeLocation2 } = useActions();
+  const { location, markerIncomig } = useSelectors();
+  const { setBrigadeLocation } = useActions();
   const onMapClick = async (event: any) => {
     const map = event.get('coords');
-    setBrigadeLocation2(map);
+    setBrigadeLocation(map);
   };
   const handlePlacemarkDrag = (e: any) => {
     const newCoords = e.get('target').geometry.getCoordinates();
-    setBrigadeLocation2(newCoords);
+    setBrigadeLocation(newCoords);
   };
   return (
     <Map
       state={{
-        center: location2[0] ? location2 : location,
+        center: location,
         zoom: 15,
       }}
       className={s.map}
@@ -37,20 +37,20 @@ const DispatcherFormMap: React.FC = () => {
       <SearchControl />
       <ZoomControl />
       <Button
-        options={{ maxWidth: 128, visible: !!location2[0] }}
+        options={{ maxWidth: 128, visible: markerIncomig }}
         data={{ content: 'Отменить' }}
-        state={{ selected: !!location2[0] }}
-        onClick={() => setBrigadeLocation2([])}
+        state={{ selected: markerIncomig }}
+        onClick={() => setBrigadeLocation([])}
       />
       <Placemark
-        geometry={location2}
+        geometry={location}
         options={{
           draggable: true,
           iconLayout: 'default#image',
           iconImageHref: marker,
           iconImageSize: [32, 32],
           iconImageOffset: [-16, -16],
-          visible: !!location2[0],
+          visible: markerIncomig,
         }}
         onDragEnd={handlePlacemarkDrag}
       />
