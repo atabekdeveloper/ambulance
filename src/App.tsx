@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'src/components/layouts/Layout';
-import { AuthLogin } from 'src/components/screens';
+import { AuthLogin, Privacy } from 'src/components/screens';
 import { routes } from 'src/routes';
 
 import { useSelectors } from './hooks';
@@ -20,6 +20,7 @@ const App: React.FC = () => {
     <div className="app">
       <Routes>
         <Route path="/login" element={<AuthLogin />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/" element={<Layout />}>
           {routes.map(({ path, element }, i) => (
             <Route key={i} path={path} element={element} />
