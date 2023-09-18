@@ -12,7 +12,7 @@ export const fetchPostUser = async (values: TUserChange): Promise<SRO<TUserItem>
   return res.data;
 };
 export const fetchEditUser = async (values: TUserChange): Promise<SRO<TUserItem>> => {
-  const res = await api.post(`/users/${values.id}`, values);
+  const res = await api.put(`/users/${values.id}`, values);
   return res.data;
 };
 export const fetchDeleteUser = async (id: number): Promise<TMessage> => {

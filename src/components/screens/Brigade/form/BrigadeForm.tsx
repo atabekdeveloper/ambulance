@@ -88,7 +88,7 @@ const BrigadeForm: React.FC = () => {
           label="Сумка"
           rules={[{ required: true, message: formMessage('Сумка') }]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </CustomModal>
