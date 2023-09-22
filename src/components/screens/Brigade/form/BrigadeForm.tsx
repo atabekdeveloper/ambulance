@@ -64,8 +64,8 @@ const BrigadeForm: React.FC = () => {
         </Form.Item>
         <Form.Item
           name="name"
-          label="Имя"
-          rules={[{ required: true, message: formMessage('Имя') }]}
+          label="Имя бригады"
+          rules={[{ required: true, message: formMessage('Имя бригады') }]}
         >
           <Input />
         </Form.Item>
