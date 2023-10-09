@@ -13,7 +13,7 @@ const Dispatcher: React.FC = () => {
   return (
     <>
       <Head
-        title="Диспетчер / Вызовы"
+        title="Диспетчер / Текущие вызовы"
         childs={[
           <Button type="primary" onClick={() => toggleModal()}>
             Добавить

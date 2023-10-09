@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable object-curly-newline */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Modal, ModalProps } from 'antd';
@@ -10,7 +11,8 @@ const CustomModal: React.FC<ModalProps & ICustomModal> = React.memo((_props) => 
   const { paramsItem, isModal } = useSelectors();
   const { form, confirmLoading } = _props;
 
-  const { toggleModal, setId, setParamsItem, setBrigadeLocation2 } = useActions();
+  const { toggleModal, setId, setParamsItem, setBrigadeLocation, setBrigadeLocation2 } =
+    useActions();
 
   const handleOk = () => form.submit();
 
@@ -19,6 +21,7 @@ const CustomModal: React.FC<ModalProps & ICustomModal> = React.memo((_props) => 
     form.resetFields();
     setId(0);
     setParamsItem(null);
+    setBrigadeLocation([]);
     setBrigadeLocation2([]);
   };
   React.useEffect(() => {
@@ -27,6 +30,7 @@ const CustomModal: React.FC<ModalProps & ICustomModal> = React.memo((_props) => 
       form.resetFields();
       setParamsItem(null);
       setId(0);
+      setBrigadeLocation([]);
       setBrigadeLocation2([]);
     }
   }, [form, confirmLoading]);
